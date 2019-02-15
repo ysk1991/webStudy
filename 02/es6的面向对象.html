@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>es6面向对面</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // class 声明一个类  constructor 声明构造器    extends 继承  super 超类或父类
+    class Person{
+        constructor(name,age){
+            this.name = name;
+            this.age = age;
+        } 
+        // 方法
+        show(){
+            alert(this.name+this.age);
+        }
+    }
+    let p = new Person('ysk',18);
+    p.show();
+
+
+    // --------------------------------------------------------
+
+    // Son的父类是Person
+    class Son extends Person {
+        constructor(name,age,job){  //自己的属性
+            super(name,age);        //继承过来的属性 方法自动继承
+            this.job=job;
+        }
+        //Person的方法已经自动继承过来了 只需要写Son自身的方法就行
+        showJob(){
+            alert(this.job);
+        }
+    }
+
+    let s = new Son('name','11','job');
+    s.show();
+    s.showJob();
+</script>
+</html>

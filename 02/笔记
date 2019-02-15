@@ -1,0 +1,32 @@
+如何使用babel 
+    在线编译 不推荐！！
+        script引入文件 browser.min.js
+        script的type="text/babel"
+        
+    使用nodejs编译 
+        1. npm init -y
+                会产生一个工程文件 package.json 
+                将src里面的文件用babel编译到dest文件里面  使用 npm run build编译文件
+                "scripts": {
+                    "build": "babel src -d dest"
+                }
+        
+        2.npm i @babel/core @babel/cli @babel/preset-env -D 
+                安装babel的依赖
+                @babel/core ：babel 核心
+                @babel/cli ： babel 命令就来自于这个
+                @babel/preset-env -D 是一个babel的预设 改把什么编译成什么
+        
+
+        3.添加一个babel的配置文件  文件名叫 .babelrc  声明presets
+
+
+面向对象 
+    1.机器语言 -> 汇编 -> 低级语言（面向过程）-> 高级语言（面向对象）-> 模块 -> 框架 -> API
+    2.语言的发展方向 面向对象的意义：越来越不需要关心内部如何实现的细节，直接调用，不需要关心对方什么语言写的，运行环境等，只要关心自己该做的事情，越来越省事  
+    3.三大特性：
+        封装性（不需要关心别人如何写的，只要用就行）
+        继承性（重用前人写的代码，只需要新增 不需要重写）
+        多态  （java用的比较多）
+ 
+ es6里面的面向对象怎么写

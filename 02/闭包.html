@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包</title>
+</head>
+<body>
+    <input type="button" value="aaa">
+    <input type="button" value="bbb">
+</body>
+<script>
+    // 闭包 －－ 只要还在用 就不会被回收
+    
+    // GC（垃圾回收） 替程序员自动释放垃圾  函数在执行中 会分配一个空间  执行后会回收这个函数
+    // 1.底层：栈   
+        // 计算机执行函数的时候 每调一次函数 会替这个函数分配一个空间 这空间叫栈 所有的变量都在这个栈里面跑  函数结束的时候也会回收  
+        // 闭包可以做到函数执行完了 栈也不回收 这就叫闭包
+    // 2.高层：把函数当成对象处理  函数调用的时候就会创建一个对象  
+
+
+
+    //每循环一次就会产生一个i  每个i都被赋了不同的值 所以i都是不同的  这个i还在被用，所以不会被回收
+    var aBtn = document.getElementsByTagName('input');
+    for(var i = 0;i < aBtn.length;i++){
+        (function(i){
+            aBtn[i].onclick=function(){
+                alert(i)
+            }
+        })(i)
+    }
+
+
+
+    //本来这个a执行完就回收了，但是这个a还在被调用  不会被回收 
+    // function show(){
+    //     let a = 12;
+    //     document.onclick = function () {     
+    //         alert(a);
+    //     }
+    // } 
+    // show();
+</script>
+</html>

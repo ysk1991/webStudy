@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>es5面向对面</title>
+</head>
+<body>
+    
+</body>
+<script>    
+    //es5  即是类又是一个构造函数  类有自己的属性还有自己的方法
+    function Person(name,age){
+        this.name = name;
+        this.age = 18;
+    }
+
+    //修改某个类的原型 添加方法
+    Person.prototype.show = function(){
+        console.log(this.name);
+    }
+
+    // 创建一个类
+    var p = new Person('abc','1');
+
+    // 调用类的方法
+    // p.show();
+
+
+    // 继承
+    function Son(name,age,job){
+        Person.call(this,name,age); //继承别人的属性 
+        this.job = job;     //添加自己的属性
+    }
+    Son.prototype = new Person();   // 
+    Son.prototype.constructor = Son;        //  构造函数指向自己
+    Son.prototype.showJob = function () {
+        console.log(this.job);
+    }
+    var s = new Son('abc', '1','fly');
+    s.show();
+    s.showJob();
+</script>
+</html>
