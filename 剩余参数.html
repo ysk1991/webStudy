@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 参数展开  
+    // 剩余参数
+    // 展开数组
+
+
+
+    // 可以用来收集剩余的参数  ..arr 必须写在最后
+    function show(a, b, ...arr){
+        console.log(a,b,arr);
+    }
+    show(12,5,44,4,5,6,7,1,4);
+
+
+    // 展开数组   ...sumArr   跟 12,5,6   写法是一样的  相当于拿到了[]里面的内容
+    let sumArr = [12,5,6];
+    let sum = (a,b,c)=>{
+        return a+b+c
+    } 
+    console.log(sum(...sumArr));
+    
+
+    // 两个数组合并
+    let arr1 = [1,2,3];
+    let arr2 = [4,5,6];
+    let arrPush = [...arr1,...arr2];
+    console.log(arrPush);
+</script>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script>
+
+
+
+    // function(参数){}   (参数)=>{}
+    // window.onload=()=>{
+    //     alert('a')
+    // }
+ 
+        
+
+    // 如果 有且仅有一个参数   ()也可以省   
+    // document.onclick=(e)=>{
+    //     alert(e.clientX + ',' + e.clientY);
+    // }
+    // 可以缩略成
+    document.onclick=e=>{
+        alert(e.clientX + ',' + e.clientY);
+    }
+    
+
+
+
+    // 如果 有且仅有一条语句 语句必须是return   {}也可以省
+    // let sum=(a,b)=>{
+    //     return a+b;
+    // } 
+    // 可以缩略成
+    let sum=(a,b)=>a+b;
+    
+
+
+
+
+
+    //  如果return 是json 一般不简写  需要简写的话 加上 （）
+    // function show(){
+    //     return {a:1,b:2}
+    // } 
+    let show = () => ({a:1,b:2});
+
+
+
+    // 修复this
+    let json={
+        a:12,
+        b:5,
+        show:()=>{
+            console.log(this);  // 无论怎么调用 this都绑定在window  因为json在全局  全局就是window
+        }
+    }
+
+
+    
+
+</script>
+<body>
+    
+</body> 
+</html>

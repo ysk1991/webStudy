@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+// Array    String  JSON 的扩展
+
+
+
+
+// Array
+    //map  映射  1对1   
+    let mapArr = [1,2,3,4,51,62];
+    // let res = arr.map(function(item,index){
+    //     if(item > 50){
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // })
+    // 可以缩写成  一个参数 可以省略()   有且只有一条语句而且是return  可以省略{}
+    let res = mapArr.map(item => item > 50 )
+    console.log(mapArr,res);       //  [1, 2, 3, 4, 51, 62]  [false, false, false, false, true, true]
+
+
+    //forEach 遍历
+    let forEachArr = [11,12,13];
+    forEachArr.forEach((item,index)=>{
+        console.log(`第${index}是${item}`);
+    })
+
+
+    //filter 过滤
+    let filterArr = [1,2,3,4,5,6,11,12,13]; 
+    let filterArr2 = filterArr.filter(item => item%2==0);        //留下偶数    
+    console.log(filterArr,filterArr2);  //[1,2,3,4,5,6,11,12,13]    [2, 4, 6, 12]
+
+    //常用写法：    把item数组里面的  颜色一样的  价格 >=100  <1000的筛选保留出来
+    // item.filter(item => item.color = data.color)
+    //     .filter(item => item.price >= 100 && item.price < 1000);
+
+
+
+    //reduce 是循环  减少   多对1  多个进去 始终出来一个数字或者结果   比如求和、求平均数 
+    let sunArr = [1,2,3,4,5];         
+    //求和  tmp:临时保存的数字 
+    let reduceRes = sunArr.reduce(function(tmp,item,index){
+        console.log(`第${index}的tmp值是${tmp}`)        //tmp： 1 ，3 ，6，10  是 1  1+2   3+3   6+4
+        return tmp+item;
+    })
+    // 求平均数    第一步先求和  第二部 求平均
+    let meanArr = [2,4];
+    let meanRes = meanArr.reduce((tmp,item,index)=>{
+        if(index < meanArr.length-1){           //未循环到最后一个数字  就累加
+            return tmp+item;
+        }else{
+            return (tmp+item)/meanArr.length;   //循环最后一个数字 累加上最后一个数字  除以数组长度 就是平均值
+        }
+    })
+    console.log(meanRes)
+
+
+
+
+
+
+
+// String  
+    // 字符串模板  `我是字符串模板，里面可以放${price}`
+    // startWith  什么东西开始         endsWith  什么东西结尾
+    let url = 'https://www.baidu.com';
+    if(url.startsWith('http://') || url.startsWith('https://')){
+        console.log('网址');
+    }else{
+        console.log('不是网址')
+    }
+
+
+
+
+    
+
+// JSON   传输数据的方式 
+    // 1.标准写法 {"key1":"我是字符串","key2":123} 如果要传输 必须加上引号 可以用JSON.stringify();
+    // JSON对象：       JSON.stringify()   JSON.parse()
+        let json = {a:12,b:5,c:'blue'};
+        let jsonStr = JSON.stringify(json);
+        console.log(jsonStr);       //可以转换为标准json格式进行传输
+
+</script>
+</html>

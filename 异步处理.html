@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script src="jquery-1.8.3.min.js"></script>
+<script>
+    //Promise  async/await
+    //Promise是一个对象 对所有的异步操作做统一的封装
+     
+    let res = $.ajax({})
+    console.log(res);   //jquery的ajax支持Promise res里面有Promise对象  
+
+
+    // .all方法 每一个异步都得成功，有一个失败就是走reject  .then里面的参数 一个 resolve成功的函数  一个 reject失败的函数
+    Promise.all([
+        $.ajax({url:'1.json',dataType:'json'}),
+        $.ajax({url:'2.json',dataType:'json'})
+    ]).then(arr=>{
+        console.log(arr);
+    },res=>{
+        console.log(res);
+    })
+    
+
+</script>
+</html> 
