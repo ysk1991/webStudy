@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script src="jquery-1.8.3.min.js"></script>
+<script> 
+    let res = $.ajax({})
+    console.log(res);   //jquery的ajax支持Promise res里面有Promise对象  
+
+
+
+
+    //Promise  async/await
+    //Promise是一个对象 对所有的异步操作做统一的封装 
+    // 有.all方法 但是里面一个接口调用失败就整个走reject
+    // 有async await方法，函数面前加async 表示整个函数里面可以用同步的方式写异步操作
+    //      await后面需要跟一个Promise（比如ajax），可以获取好几个异步接口里面的数据进行逻辑交互
+    //      实际内部实现还是会编译成 异步嵌套异步的方式  就是以前的ajax请求成功以后再调用另外一个ajax
+
+
+
+    // 不常用
+    // .all方法 每一个异步都得成功，有一个失败就是走reject  
+    // .then里面的参数 一个 resolve成功的函数  一个 reject失败的函数
+    // 缺点：
+        // .all里面一个接口不同 整个.all里面的异步操作都报错走reject
+        // 只适用于读数据，不同接口之间的逻辑无法处理
+
+    Promise.all([
+        $.ajax({url:'1.json',dataType:'json'}),
+        $.ajax({url:'2.json',dataType:'json'})
+    ]).then(arr=>{
+        console.log(arr);
+    },res=>{
+        console.log(res);
+    })
+    
+
+
+
+
+    // 常用： async await   用同步的方式写异步的操作 
+    // 在Promise前面加一个await 只会对Promise异步操作进行特殊处理  
+    // 即使第一个接口请求失败了  第二个照常正常 
+    // async内部编译后还是  异步回调嵌套异步回调  一个接口成功了在success里面写下一个异步回调
+            // 比如：
+            // $.ajax({ url: '1.json', dataType: 'json',function(){
+            //     $.ajax({
+            //         url: '1.json', dataType: 'json', function() {
+            //             $.ajax({
+            //                 url: '1.json', dataType: 'json', function() {
+
+            //                 }
+            //             })
+            //         }
+            //     })
+            // } })
+
+    // 在普通函数前面加 async 就是 async函数  跟普通函数没有区别  函数里面的异步操作可以写成同步的方式 不需要嵌套
+    // async function show(){
+    //     let data1 = await $.ajax({ url: '1.json', dataType: 'json' });
+    //     let data2 = await $.ajax({ url: '2.json', dataType: 'json' });
+    //     console.log(data1,data2);
+    // }
+
+    // 可以缩写成：
+    let show = async ()=>{
+         //         await后面必须跟一个Promise对象 ajax就是一个Promise
+        let data1 = await $.ajax({ url: '1.json', dataType: 'json' });
+        let data2 = await $.ajax({ url: '2.json', dataType: 'json' });
+        console.log(data1, data2);
+    }
+</script>
+</html> 
