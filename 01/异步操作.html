@@ -38,6 +38,8 @@
         $.ajax({url:'2.json',dataType:'json'})
     ]).then(arr=>{
         console.log(arr);
+        let [data1,data2] = arr;    //接受两个ajax返回的数据
+        console.log(data1,data2);       
     },res=>{
         console.log(res);
     })
