@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>es6模块化-webpack</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // es6模块化  浏览器还不支持    webpack编译后浏览器就认识了
+    // 没有模块 －> CMD(同步加载) -> AMD(异步加载) -> ES6语言提供的模块化支持
+
+    // webpack  给我们打包用 把多个文件打包成一个文件 顺便解决模块问题
+    // webpack 全局安装  npm i weback -g    
+    // webpack 项目目录再安装 npm install --save-dev webpack
+    // 命令运行命令： webpack   会自动去找webpack.config.js 文件
+    // webpack配置 
+        // 1. entry: 入口地址
+        // 2. output: 对外输出，必须是一个对象  对象下的path必须是一个绝对路径；
+        // 3. filename : 文件名 
+        // 4. mode: 编译的模式 
+        // 5. nodejs的要求：所有的当前的路径前加 ./ 
+</script>
+<script src="build/bundle.js"></script>
+</html>
