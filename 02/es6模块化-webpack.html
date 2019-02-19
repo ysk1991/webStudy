@@ -23,6 +23,32 @@
         // 3. filename : 文件名 
         // 4. mode: 编译的模式 
         // 5. nodejs的要求：所有的当前的路径前加 ./ 
+
+
+        // export let a = xxx;
+        // export const a = xxx;
+
+        // export function xxx(){}
+        // export class xxx{}
+        // export default xx;
+
+
+        // 可以挑里面的成员输出
+        // export {a,v,b,n};
+
+
+        // 引入默认成员
+        // export default aaa; 导出默认值
+        // import s from './xxx'; aaa会赋值给s 只能取default的数据
+
+
+        //模块代码引入进来，不引入内部成员 处理图片 处理非程序类的代码
+        // import '/1.jpg'
+        // import './1.css'
+
+
+        // 异步引入 可以把不重要的大文件异步引入 这样不会因为文件大而卡
+        //let promise = import('./mod1');
 </script>
 <script src="build/bundle.js"></script>
 </html>
