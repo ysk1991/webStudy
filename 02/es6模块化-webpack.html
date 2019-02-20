@@ -14,41 +14,51 @@
     // 没有模块 －> CMD(同步加载) -> AMD(异步加载) -> ES6语言提供的模块化支持
 
     // webpack  给我们打包用 把多个文件打包成一个文件 顺便解决模块问题
-    // webpack 全局安装  npm i weback -g    
+    // webpack 全局安装  npm i webpack -g    
     // webpack 项目目录再安装 npm install --save-dev webpack
+    // webpack-cli 全局安装 npm install webpack-cli -g  
+    // webpacl4中  webpack跟webpack-cli 分开管理 必须分开全局安装 
     // 命令运行命令： webpack   会自动去找webpack.config.js 文件
     // webpack配置 
         // 1. entry: 入口地址
         // 2. output: 对外输出，必须是一个对象  对象下的path必须是一个绝对路径；
         // 3. filename : 文件名 
         // 4. mode: 编译的模式 
-        // 5. nodejs的要求：所有的当前的路径前加 ./ 
+        // 5. nodejs的要求：所有的当前的路径前加 ./             
 
 
-        // export let a = xxx;
-        // export const a = xxx;
-
+        // export let a = xxx;  export const a = xxx;  
         // export function xxx(){}
         // export class xxx{}
         // export default xx;
 
+        // 拿出所有的成员
+        // import * as from './xxx'
 
         // 可以挑里面的成员输出
         // export {a,v,b,n};
 
 
-        // 引入默认成员
+        // 引入默认成员 最常用!! 用来导入class
         // export default aaa; 导出默认值
         // import s from './xxx'; aaa会赋值给s 只能取default的数据
 
 
-        //模块代码引入进来，不引入内部成员 处理图片 处理非程序类的代码
-        // import '/1.jpg'
-        // import './1.css'
+        //模块代码引入进来，不引入内部成员 处理图片 处理非程序类的代码  只导入 不处理
+        // import '/1.jpg'  
+        // import './1.css' 
 
+        // 从另一个模块导出 相当于把xxx里面的成员都倒进来 然后再倒出去  
+        // export * from './xxx'
+        // export {x,x,x} from './xxx'      同步可以挑 所以优于异步
+        // export {default} from './xxx'    把default倒出去
 
-        // 异步引入 可以把不重要的大文件异步引入 这样不会因为文件大而卡
+        // 异步引入是整块引入 所以不是最优的  函数对象 可以把不重要的大文件异步引入 这样不会因为文件大而卡
         //let promise = import('./mod1');
+
+
+        // exports 库里面带的导出  cmd的导出
+        // export  ES6的导出
 </script>
 <script src="build/bundle.js"></script>
 </html>
