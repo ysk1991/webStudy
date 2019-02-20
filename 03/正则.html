@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+// 两种写法等价
+// js风格
+    // let reg = new RegExp();
+// perl风格
+    // let reg = /\d+/g;
+
+
+
+// let str = 'sdasdAsewqf';
+// let reg = /a/;    //匹配小写a的位置  下标数字
+// let reg = /a/i;    //忽略大小写     ig  gi 全局匹配忽略大小写  ig位置不重要
+// alert(str.search(reg));   
+
+// 取出所有数字
+// let str = 'fd1asd12f 124321fasd55as  12sdfs55df  1234wefd132fs';
+// let reg = /\d+/g;    //1,12,124321,55,12,55,1234,132         
+// alert(str.match(reg))
+
+
+// 全局(g)的a都替换成* 大小写都要(i)
+// let str = 'ads asasdf as AAsSf As aas asd';
+// let reg = /a/gi;
+// alert(str.replace(reg,'&'));
+
+
+// 去掉所有空格
+// let str = 'asdasdas asdas  asd as  asd '; 
+// alert(str.replace(/\s+/g,''));
+</script>
+</html>
