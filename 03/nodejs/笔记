@@ -8,7 +8,7 @@ nodejs
     3.工具类开发  webpack  gulp
 
 优势：
-    1.便于前端入手
+    1.便于前端入手 前端用的代码  nodejs都可以用 window document不可以
     2.利于与前端代码整合
     3.性能高 
     
@@ -25,3 +25,21 @@ nodejs
     1.卸载node本身
     2.手动删除nodejs/node_modules 整个文件
     3.手动删除 c:/users/你/node_modules
+
+
+运行nodejs
+    node 1.js    
+
+
+
+
+包：
+    1.npm i multer
+    2.引入
+
+
+
+
+
+
+
