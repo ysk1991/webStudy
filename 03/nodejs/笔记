@@ -28,17 +28,20 @@ nodejs
 
 
 运行nodejs
-    node 1.js    
+    const xx = require('xxx');
+    cd js的目录     node xxx.js    
 
 
 
 
-包：
-    1.npm i multer
+用包的步骤：   
+    1.npm i multer  node里面  npm可以自动解决包的依赖
     2.引入
+    3.使用
 
 
-
+监听：等待客户端的连接
+端口：数字
 
 
 
