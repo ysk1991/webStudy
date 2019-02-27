@@ -1,0 +1,13 @@
+body{   
+    background: red
+}
+.div1{
+    transform: rotate(0deg);
+    width: 200px;
+    height: 200px;
+    background: yellow;
+}
+.div1:hover{
+     transform: rotate(90deg);
+     transition: 1s ;
+}

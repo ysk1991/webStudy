@@ -1,0 +1,10 @@
+gulp
+    1.合并，编译，压缩    
+    2.安装
+        全局的： npm i gulp -g   启动器
+        本地的： npm i gulp      核心库 
+    3.创建gulpfile.js
+    4.cnpm init -y 生成package.json
+    5.cnpm i gulp-uglify -D  压缩js模块
+webpack
+       合并，编译，压缩    

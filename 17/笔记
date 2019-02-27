@@ -1,0 +1,56 @@
+ webpack与gulp的区别
+    webpack:打包工具  把项目中文件打包成一个或多个文件 实现模块化
+        1.打包工具   
+        2.模块化识别 
+        3.编译模块工具 
+    gulp：是工具链  构建工具  对文件进行压缩编译 实现自动化
+        1.构建项目工具
+        2.模块化
+        3.提高工作效率
+
+
+
+
+webpack： 唯一的功能打包
+
+
+
+webpack.config.js
+    module.exports={
+        mode:'none','production','developemt'       none:只是打包   production尽量压小  developemt有错爆出来
+        entry:'入口',
+        output:{
+            path,
+            filename
+        }
+    }
+
+
+
+单入口，多入口
+    const path = require('path');
+    module.exports={
+        mode:'development',
+        entry:{     //入口可以单入口 可以多入口 多入口就是json  一般使用单入口
+            index:'./src/1.js',
+            admin: './src/2.js'
+        },
+        output:{
+            path:path.resolve(__dirname,'build'),
+            filename:'[name].min.js'            //双入口 名字是占位符
+        }
+    }
+
+
+
+loader : 帮助webpack处理js以外的文件      
+    1.下载 
+        cnpm init -y  会生成一个 package.json
+        cnpm i style-loader css-loader -D
+        npm i srtle-loader css-loader
+
+    2.postcss-loader    给浏览器加前缀   
+      autoprefixer      根据浏览器兼容表 选择性的添加兼容
+      cnpm i autoprefixer postcss-loader -D
+
+    3.file-loader  base读出来    加载任何形式的文件  
