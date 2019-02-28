@@ -1,0 +1,106 @@
+vue react 
+    20%时间花在表现层
+    视图层与数据层 自动同步
+    不需要dom操作
+
+jquery    80%时间花在表现层
+
+
+-------------------------------------------------------------------
+
+前端渲染
+    降低服务器负担，带宽压力小
+    用户体验好
+
+后台渲染    
+    SEO
+    兼容
+    安全性
+
+
+
+-------------------------------------------------------------------
+
+
+vue    
+    核心:数据，不是表现层
+    MVVN    Model-View-ViewModel
+
+
+
+
+    {{name}}
+    {{number++}}    //可以写js
+
+
+
+
+    el
+    data
+    methods:{       
+        sum(){}         //里面不能写箭头函数  不然this指向是window
+    }
+
+-------------------------------------------------------------------
+
+
+指令（directive） 补充了html属性  自定义的html属性
+    
+    v-bind:title=" 1+1 "      :title=" 1+1 "
+
+    :class="class_arr"
+    class_arr:['aaa','bbb','ccc']       
+
+    :style="style_json"
+    class_json:{width:200,height:200}
+
+    :src=""
+
+    
+
+    双向绑定    v-model=""
+        跟输入组件放一起用 div无法跟着变
+
+        view  controller  model   本来view跟model通过controller进行交互 双向绑定跳过了controller自己进行交互,vue帮我们做了这个事情
+
+        <input v-model="name" />
+        data:{
+            name:123
+        }
+
+
+
+    v-text  一般不用 纯文本 会带标签
+    v-html  常用 相当于 innerHTML
+        <div v-html="<p>123123123</p>"></div>
+
+
+
+
+    事件  
+        v-on:click="fn()"       
+        简称  @click
+        methods:{
+            fn(){}
+        }
+
+
+    v-show     display none/block  样式修改而已
+    v-if       是否存在 直接dom存在或删除元素
+
+
+    
+    循环数组
+        数组：  v-for="item,index in arr"
+        json：  v-for="val,key in json"
+        字符串： v-for="s in str"
+
+
+
+
+
+
+
+
+
+
