@@ -35,7 +35,7 @@ module.exports={
             {
                 test:/\.(jpg|png|gif)$/i,
                 use: {
-                    loader:'url-loader',            //一般用这个  大小文件都可以处理 小文件可以base64 大文件可以处理
+                    loader:'url-loader',            //一般用这个  大小文件都可以处理 小文件可以base64 大文件可以处理（需安装file-loader才能处理大文件）
                     options:{
                         outputPath:'images/',
                         limit:502*1024              //小于502*1024转为base64
