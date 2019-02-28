@@ -1,13 +1,15 @@
-body{   
-    background: red
-}
+ 
 .div1{
     transform: rotate(0deg);
     width: 200px;
-    height: 200px;
-    background: yellow;
+    height: 200px; 
 }
 .div1:hover{
      transform: rotate(90deg);
      transition: 1s ;
+}
+.div2{ 
+    width: 200px;
+    height: 200px; 
+    background: url(../img/1.jpg) no-repeat;
 }

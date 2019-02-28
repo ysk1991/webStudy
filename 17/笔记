@@ -53,4 +53,60 @@ loader : 帮助webpack处理js以外的文件
       autoprefixer      根据浏览器兼容表 选择性的添加兼容
       cnpm i autoprefixer postcss-loader -D
 
-    3.file-loader  base读出来    加载任何形式的文件  
+
+    3.file-loader  
+        读取并且输出文件    加载任何形式的文件  
+        cnpm i file-loader -D
+        
+      url-loader  可以替代file-loader
+        读取并且输出文件  
+        cnpm i url-loader -D
+
+
+      css的less
+      cnpm i less-loader less -D
+      
+      编译es6
+      cnpm i babel-loader -D
+      
+
+
+
+热更新  webpack-dev-server
+    在服务器环境下可以 
+    编译结果不会写到磁盘 只是编译到到内存
+    cnpm i webpack webpack-cli webpack-dev-server -D       
+    无法直接启动 package.json 加一行 
+     "scripts": { 
+         "start": "webpack-dev-server"
+    }
+    使用 npm install start 执行热更新
+    注意路径的问题 报错都可能是路径问题
+ 
+
+
+代码风格 代码质量 eslint
+    cnpm i eslint eslint-loader -D
+    {
+        "parserOptions":{
+            "ecmaVersion":6,
+            "sourceType":"module",
+            "ecmaFeatures":{
+                "jsx":true
+            }
+        },
+        "rules":{
+            "indent";["error",2],   //2个缩进
+            "linebreak-style":["error","windows"], //window风格
+            "quotes":["error","double"],    //双引号
+            "semi":["error","always"]   //结尾一定要有分号
+        }
+    }
+
+
+
+
+测试   
+    单元测试框架-jest 
+    网址：jest.io
+    安装：cnpm i jest jest-webpack
