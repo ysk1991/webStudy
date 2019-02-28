@@ -1,0 +1,53 @@
+U盘 -> 付费（CVS）-> SVN -> 分布式（git）
+
+git 分布式 每个客户端都是服务器
+    git clone ...
+    git add .   添加当前目录所有东西
+    git commit -m 提交到本地仓库
+    git push      提交到远程仓库
+
+
+
+
+    git pull 时有冲突的时候 可能会提醒 please commit your changes or stash them before you merge
+    然后 add commit push 然后就提醒报错有冲突 提醒 hint hint git pull before pushing again
+    然后按照提醒 git pull一下 然后文件中就可以看到冲突的
+    别人的版本:
+        <<<<HEAD
+            <代码></代码>
+        ======
+
+    自己的版本:
+        <代码></代码>
+        >>>>>>asdasdsadasd
+
+    冲突解决以后  再commit push
+
+
+    
+    
+    github网页上面有  Unwatch star Fork
+        Fork：代表复制一套代码 单独改  然后Fork上去 别人要是要用 github网页上面有 pull Request会提醒有1个提交 会合并上去
+
+
+
+
+svn 集中式 中心服务器 唯一最新版
+    checkout
+    commit
+    updata  commit的时候如果有冲突 执行updata
+    解决冲突
+
+
+    
+
+
+
+
+gulp
+webpack
+
+
+ 
+
+
