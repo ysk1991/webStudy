@@ -94,13 +94,52 @@ vue
         数组：  v-for="item,index in arr"
         json：  v-for="val,key in json"
         字符串： v-for="s in str"
+        数字： v-for="s in 50"
+
+    :key     
+        vue需要监控我的数据是怎么变化的 根据key来跟踪 要跟踪每一条数据变化  给每个循环出来的元素加key 
+        不加也会自己生成一个key  但是与数据无关 所以需要给他指定一个key
 
 
 
+    虚拟dom  
+        合并请求
+        快速查询
+        局部刷新
+        就是一个json  渲染成html结构 
+        {
+            tag:'ui',
+            child:[
+                {
+                    tag:'li',child[
+
+                    ]
+                }
+            ]
+        }
+
+-------------------------------------------------------------------
+
+v-pre:预编译
+    1.提高性能，vue不会去解析他，直接输出
+    2.防止意外
+    3.给我原模原样的解析就行，就算报错也展示出来
 
 
 
+v-cloak:
+    1.防止vue代码意外泄露，加载慢的时候，会把{{}}等vue代码展示出来，因为js会阻塞住
+    2.  *[v-cloak]:display:none;
+        <div v-cloak>{{a}}</div>
+        这个a编译完成之前 这个标签是不会显示的
+        
 
+Proxy ：
+    数据同步
+    let _data = {
+        name:'aaa',
+        age:'1'
+    }
+    let data = new Proxy(_data,{
 
-
-
+    })
