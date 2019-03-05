@@ -1,0 +1,9 @@
+创建 index.html
+创建文件
+安装开发依赖
+
+路由：
+cnpm i vue vue-router -D
+
+css样式:
+cnpm i css-loader style-loader -D

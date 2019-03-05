@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>路由</title>
+    <script src="../vue.js"></script>
+    <script src="../vue-router.js"></script>
+</head>
+<style>
+.links .nav{
+    color:#ccc;
+}
+/* 可以直接给当前的路由加样式 */
+.links .router-link-active{
+    color: black;
+}
+</style>
+<body> 
+    <div id="div1">
+        
+        <div class="links">
+            <!-- <a href="#/a">页面1</a> -->
+            <!-- <a href="#/b">页面2</a> -->
+
+            <router-link class="nav" :to="{name:'name-news',params:{id:2}}">页面1</router-link>
+            <router-link class="nav" to="/user/1">页面2</router-link>
+        </div>    
+        
+        <div>
+            <input type="button" value="js控制跳转路由" @click="fn1();">
+            <input type="button" value="js控制跳转路由" @click="fn2();">
+        </div>
+
+        <!-- 1. 路由容器 -->
+        <router-view></router-view> 
+    </div>
+</body>
+<script>
+    // 2. 路由表
+    let router = new VueRouter({
+        routes:[
+            {
+                path:'/news',   //必填
+                name:'name-news', //可有可无 可使用name跳转
+                component:{template:`<div>{{$route.params}}</div>`},
+                // beforeRouteUpdate(current_router,old_router,next){
+                //     if(true == confirm('离开本页 数据回丢失 继续吗')){
+                //         next();
+                //     }
+                // }
+            },
+            {
+                path:'/user/:id/',  //传参
+                name:'user', //可有可无
+                component:{
+                    template:`<div>{{$route.params}}</div>`
+                }
+            }
+        ]
+    })
+    let vm = new Vue({
+        el:'#div1',
+        data:{},
+        router,
+        methods:{
+            fn1(){
+                this.$router.push('/user/19');
+            },
+            fn2(){
+                this.$router.push({name:'user',params:{id:20}});
+            }
+        },
+        watch:{
+            $route(current_router,old_router){
+                console.log(current_router,old_router)
+            }
+        }
+    })
+</script>
+</html>

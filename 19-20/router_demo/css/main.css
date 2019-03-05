@@ -1,0 +1,7 @@
+.nav-item{
+    color:#ccc;
+    font-size: 32px;
+}
+.nav .router-link-active{
+    color: #333;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算属性</title>
+</head>
+<script src="../vue.js"></script>
+
+<body>
+    <div id="div1">
+        <input type="text" v-model="a"> 
+        <input type="text" v-model="user_info.name">
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: '#div1',
+        data: {
+            a: "a", 
+            user_info:{
+                name:1
+            }
+        },
+        watch: {
+            a(){
+                console.log(1);
+            },
+            'user_info.name':function(){
+                console.log('username变了');
+            }
+        } 
+    })
+</script>
+
+</html>

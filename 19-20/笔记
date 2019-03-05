@@ -1,0 +1,95 @@
+vue 高级用法
+
+--------------------------------
+
+事件修饰符 
+    @click="fn()"
+    @click.stop="fn()";
+
+阻止默认事件
+    @submit.prevent="submit()"   比如表单提交组织默认事件  
+    @submit.prevent.once="submit()"     可以混用 
+
+native
+    原生的事件 组件里才用
+
+.keycode 
+    键盘按键
+     @keydown.enter="fn()" @keydown.13="fn()"    按回车  筛选按键 
+    @keydown.ctrl.enter  ctrl+enter 一起按
+self 只认自己的事件
+
+captrue 
+
+--------------------------------
+
+computed - 计算属性
+    其他数据变了 我重新计算
+    缓存——性能
+    方便 读／写
+
+
+watch － 监听
+
+vue-router
+    1. 占位符 容器  <router-view></router-view>
+        跳转       <router-link to="/a">页面1</router-link>
+
+    2. let router = new VueRouter({
+        routes:[
+            path:'',
+            component:''
+        ]
+    })
+
+    3.new Vue({
+        el,
+        data,
+        router
+    })
+
+    4.  为什么路由要加＃ ?
+        hash路由 锚点 防止页面跳转 单页应用 便于浏览器返回  便于收藏
+        
+    5. 命名路由
+        有一个可选参数 name  可以直接拿来跳转
+
+    6. 路由可以重复  先碰到哪个就走哪个路由    aaa /:id
+
+    7. js 控制路由跳转 $router 是方法
+        this.$router.push(
+            string|object
+        )
+        methods:{
+            fn1(){
+                this.$router.push('/user/19');
+            },
+            fn2(){
+                this.$router.push({name:'user',params:{id:20}});
+            }
+        }
+
+    8.  $router 操作路由跳转  是方法
+        $route 获取路由信息  是数据
+
+
+    9. history  
+        堆栈 ： 后进的先出  先进的后出 
+        js控制路由 
+            push() 入栈        希望用户回到上一个页面或操作
+            replace()   替换栈里最后的（当前的）历史记录   不希望用户回到某一个页面或操作
+            go(-1)   往前一步  go(1) 往前一步  go(10) 跳10步
+
+
+    10. 监视路由
+            watch - 不推荐 只能看 不能操作
+            路由守卫   能操作
+
+
+    11. 多视图
+
+            
+
+数据交互
+
+组件

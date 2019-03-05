@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>路由</title>
+    <script src="../vue.js"></script>
+    <script src="../vue-router.js"></script>
+</head> 
+
+<body>
+    <div id="div1">
+        <div class="links"> 
+            <router-link to="/">首页</router-link>
+            <router-link to="/news">新闻</router-link>
+        
+            <!-- 相当于header -->
+            <router-view name="header"></router-view>
+            <!-- 相当于components下的default -->
+            <router-view></router-view>  
+            <!-- 相当于footer -->  
+            <router-view name="footer"></router-view>
+        </div>
+    </div>
+</body>
+<script>
+
+    const heardCmp = {
+        template:'<div>头部</div>'
+    }
+    const footerCmp = {
+        template:'<div>底部</div>'
+    }
+    const footerCmp2 = {
+        template:'<div>底部2</div>'
+    }
+    const newCmp={
+        template:'<div>新闻</div>'
+    }
+    const userCmp={
+        template:'<div>用户</div>'
+    }
+    const indexCmp={
+        template:'<div>首页</div>'
+    }
+    
+
+
+    let router = new VueRouter({
+        routes: [{
+                path: '/',  
+                name: 'index',  
+                components: {
+                    default: indexCmp,
+                    header:heardCmp,
+                    footer:footerCmp
+                }
+            },
+            {
+                path: '/news',
+                name: 'news',
+                components: {
+                    default: newCmp ,
+                    header:heardCmp,
+                    footer:footerCmp2
+                }
+            }
+        ]
+    })
+    let vm = new Vue({
+        el: '#div1',
+        data: {},
+        router,
+        methods: {
+            fn1() {
+                this.$router.push('/user/19');
+            },
+            fn2() {
+                this.$router.push({
+                    name: 'user',
+                    params: {
+                        id: 20
+                    }
+                });
+            }
+        },
+        watch: {
+            $route(current_router, old_router) {
+                console.log(current_router, old_router)
+            }
+        }
+    })
+</script>
+
+</html>
