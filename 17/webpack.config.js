@@ -10,9 +10,9 @@ module.exports={
         index: './src/js/1.js', 
     },
     output:{
-        path:path.resolve(__dirname,'build'),
+        path:path.resolve(__dirname,'build'),   //指定输入目录
         // filename:'[name].min.js'            //双入口 名字是占位符
-        filename: 'bundle.min.js'
+        filename: 'bundle.min.js'               //指定输出文件名字
     },
     module:{
         // import只认识js  要认识其他scss sass 文件 图片 都需要loader 没有loader，webpack就是一坨屎
