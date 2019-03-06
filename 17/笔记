@@ -80,7 +80,7 @@ loader : 帮助webpack处理js以外的文件
      "scripts": { 
          "start": "webpack-dev-server"
     }
-    使用 npm install start 执行热更新
+    使用 npm run start 执行热更新
     注意路径的问题 报错都可能是路径问题
  
 
