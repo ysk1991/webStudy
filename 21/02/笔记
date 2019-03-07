@@ -1,0 +1,21 @@
+vue2.0
+    webpack不认识vue文件 需要loader编译
+    cnpm i vue-loader vue-style-loader vue-html-loader vue-template-compiler -D
+
+    webpack  引入 const VueLoaderPlugin = require('vue-loader/lib/plugin');  
+    new VueLoaderPlugin()
+
+    使用less
+    cnpm i less less-loader -D
+
+    使用axios
+        cnpm i axios vue-axios -S
+    使用vue-resource        
+        cnpm i vue-resource -S
+    使用fetch
+        let res = await fetch('http://localhost:8080/data/1.json');
+        console.log(await res.json())
+
+
+    使用vue-loader
+        cnpm i vue vue-loader -S        

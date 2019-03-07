@@ -1,0 +1,51 @@
+vue生命周期的解释  或 叫 勾子函数的解释
+
+勾子是个什么概念 ： hook  最先是拦截一些系统操作 监听键盘 监听人家qq聊天记录 vue借用这个词
+挂载：  生成具体的html  原来只是js  变成页面的标签的过程
+
+1. new一个vue   
+    new Vue({})           主动new
+    Vue.component()       vue自己new  
+2. beforeCreate
+        正式创建之前
+3. created ！！！！！
+        即将挂载 可以数据请求  对象内部准备好了 状态可以用了  
+4. 是否有el选项
+     如果有el   vue认为你用了new Vue({})
+     没有el     vue认为你用了Vue.component()
+5. 是否有template     
+     如果有  会编译template
+     如果没有  会使用标签的html作为你的template
+6. beforeMount
+    挂载之前
+7. mounted  ！！！！！！ 
+    html，子组件 可以操作元素  可以操作refs 
+8. updata
+    数据发生变化的时候会updata    
+        beforeUpdate
+        updated
+9. beforeDestroy  不安全不会用  浏览器关了可能根本就没有执行完
+   destroyed 
+
+
+
+
+webpack 插件
+    plugin   
+        cnpm i html-webpack-plugin -D 
+        const HtmlWebpackPlugin = require('html-webpack-plugin');
+         plugins:[
+            new HtmlWebpackPlugin({
+                template:'index.html'
+            })
+        ]
+
+别名:
+    resolve:{
+        alias:{
+            'vue':'vue/dist/vue.esm'
+        }
+    }
+
+
+    
