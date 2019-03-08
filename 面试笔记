@@ -10,15 +10,15 @@
 21.
     01 生命周期 钩子函数 
     02 vue2.0组件话写法
-22. vue-cli
+22. vue-cli  vuex
 
 
 
-简历可以写：async 异步可以当同步写
-
-
-
-ES6的怎么实现类还要类的继承         02课es6的面向对象
-webpack的了解                    见17课的webpack.config.js 
+简历可以写：  
+    async 异步可以当同步写
+    vuex
+    ES6的怎么实现类还要类的继承         02课es6的面向对象
+    webpack的了解                    见17课的webpack.config.js 
+    
 
 
