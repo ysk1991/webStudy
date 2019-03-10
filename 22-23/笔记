@@ -1,0 +1,50 @@
+测试：
+    1.单元测试: 最重要！  单测一个问题 一个文件 一个模块 是不是会跑一次
+    2.集成测试：组合起来了 单元测试之后  都弄好了 来一次
+    3.压力测试：等着发布了  高用户量的测试
+    4.回归测试：提交的东西可以通过测试 才提交
+
+
+    
+vue-cli:
+    github 搜vue template  可以搜到vue模版
+    安装： npm -i -g  vue-li        安装好以后可以使用vue命令
+    安装webpack模版  
+    vue init webpack project1
+    文件解释：
+        build  config 两个都是配置文件
+        src/assets  会被打包名字会有变化                            可以放图片视频等
+        src/static  不会被打包 放一些名字有要求 不想名字变化的文件      可以放图片视频等
+
+vuex
+     dcnpm vuex -D
+    全局 统一 单一 
+    解决什么问题？
+        数据跨组件共享
+        防止数据意外修改
+        调试、测试 使用浏览器的devtools容易追踪 谁改的 哪个组件改的
+    state:
+        一个json，存放数据变量
+    mutations(state,arg):           $store.commit('add',5);不推荐
+        对一个操作的封装，唯一合法可以操作state的地方
+        可以定义很多操作state的方法  然后在actions里面被调用
+    actions(context,arg):           $store.dispatch('add',5);推荐
+        用dispatch方法向store发出一个方法操作mutations改变state 从而改变组件        
+        $store.dispatch(actions里面的一个方法或者多个方法,payload); 比如要修改加购物车 要修改件数与总价
+    components:
+        发出一个action 操作mutations 改变state 改变components  
+
+    vuex辅助方法： 可以把store对象里面的 state actions getters 映射到 vue组件里面直接使用
+        mapState        state -> computed方法里       
+        mapActions      actions -> methods方法里
+        mapGetter       getters -> computed方法里
+
+
+    vuex的store可以利用modules拆分成很多个子store  用来分业务 比如一个用户的store  一个商品的store等
+    但是主store跟多个的子store下面的，mutations跟actions不区分  取方法名字不能重复  不然都会执行 没有自己的命名空间
+
+
+
+vue-animate 
+    安装：cnpm i vue2-animate -D
+    内部是css
