@@ -1,0 +1,8 @@
+富文本编辑器:
+    1.tinymce 
+    2.网易富文本编辑器
+
+用vue-cli 构建一个webpack的项目
+    1. vue init webpack yi
+    2. 分组件
+    3. 公用的css image -> assets(会更改你的文件名字)
