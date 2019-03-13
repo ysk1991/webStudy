@@ -74,7 +74,7 @@
 
     // 可以缩写成：
     let show = async ()=>{
-         //         await后面必须跟一个Promise对象 ajax就是一个Promise
+         //await后面必须跟一个Promise对象 ajax就是一个Promise
         let data1 = await $.ajax({ url: '1.json', dataType: 'json' });
         let data2 = await $.ajax({ url: '2.json', dataType: 'json' });
         console.log(data1, data2);

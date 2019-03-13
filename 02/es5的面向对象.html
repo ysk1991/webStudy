@@ -30,7 +30,7 @@
 
     // 继承
     function Son(name,age,job){
-        Person.call(this,name,age); //继承别人的属性 
+        Person.call(this,name,age); //继承别人的属性  call后面跟具体参数   apply后面跟有效的数组或arguments
         this.job = job;     //添加自己的属性
     }
     Son.prototype = new Person();   // 
