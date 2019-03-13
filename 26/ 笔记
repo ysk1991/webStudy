@@ -1,0 +1,47 @@
+表单提交 
+
+    详见reg.vue
+    
+    <form v-if="cur_step==2"  ref="form3"  method="post"  enctype="multipart/form-data">
+    <input name="" type="hidden" />
+    
+     methods(){
+         async submit_form(){
+            let oFrom3 = new FormData(this.$refs['form3']); 
+            let res = await fetch('/api/reg',{
+                method:'post',
+                body:oFrom3
+            })
+            let json = await res.json();
+        }
+     }
+    
+
+--------------------------------------------------------------------------------
+
+    methods(){ 
+        async login(){
+            let oFrom1 = new FormData(this.$refs['form1']); 
+            let res = await fetch('/api/login',{
+                method:'post',
+                body:oFrom1
+            })
+            let json = await res.json();
+        }
+     }
+    
+
+--------------------------------------------------------------------------------
+    
+    登陆验证 
+        session  session_id => cookie  有跨域问题
+        token   token_id => cookie | localStorage 常用
+
+--------------------------------------------------------------------------------
+
+Array.from(this.$refs['catalog']).map(select=>select.value)
+
+--------------------------------------------------------------------------------
+
+
+四级分类  级联操作   详见 release.vue   catalogs=[]  catalog_change()

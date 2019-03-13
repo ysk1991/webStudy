@@ -1,0 +1,18 @@
+项目技巧:
+   1. 样式名字 class可以动态
+    :class=:class="['iconfont',data.icon]" data.icon数据获取来的
+
+   2. 有两个tab  tab下面内容一样 只是数据不同 怎么实现点击tab 切换下面对应的内容
+    设置一个tab数组  数组有自己的下标 index 0，1，2
+    设置一个当前点击的tab项的下标 给他一个current_click_index
+    如果 index == current_click_index 就是当前项 就选中状态
+    下面的内容 也这样做判断  
+        整个元素做显示隐藏       :style="{display: index==cur?'block':'none'}"
+        class的名字做显示隐藏    :class="index==cur?'checked':'check'"
+ 
+    3.联动 详见项目 reg.vue
+
+    4. 字体图标 如果频繁使用 放在assets里面 
+
+    5. 步骤 上一步 下一步操作 不同页面展示 定义的cur_step  ++ 或 --  详见reg.vue    
+        

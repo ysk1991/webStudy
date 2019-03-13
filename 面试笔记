@@ -1,3 +1,12 @@
+
+http请求：
+    https://blog.csdn.net/yicixing7/article/details/79320821
+    https://blog.csdn.net/u010710458/article/details/79636625
+
+promise原理：
+    https://segmentfault.com/a/1190000009478377?utm_source=tag-newest
+
+
 1.  es6
 2.  模块化 面向对象
 3.  正则
@@ -22,3 +31,193 @@
     
 
  
+
+
+自我介绍：
+    面试官你好，我叫袁少凯，很高兴有这一次的面试机会，
+    我目前就职于脸谱控股有限公司，担任前端工作，平实接触一些关于公司业务性质的开发，
+    还喜欢看一些关于前端的网站，segmentfault，stackOverflow，前端早读课之类的公众号
+ 
+ 
+    https://zhuanlan.zhihu.com/p/26540168
+    箭头函数不能使用的情况：
+        定义对象方法
+        回调函数
+        原型函数
+        定义构造函数
+    箭头函数什么时候可以省略括号：
+        无行参的时候    
+ 
+
+    sass less 区别
+        less @符号表示变量  sass $符号表示变量
+        sass支持if else 语句控制
+
+ 
+
+谈谈webpack：
+优点：WebPack 是一个模块打包工具，你可以使用WebPack管理你的模块依赖，并编绎输出模块们所需的静态文件。
+它能够很好地管理、打包Web开发中所用到的HTML、Javascript、CSS以及各种静态文件（图片、字体等），让开发过程更加高效。
+对于不同类型的资源，webpack有对应的模块加载器。webpack模块打包器会分析模块间的依赖关系，最后生成了优化且合并后的静态资源。
+  好处：
+  1.loader处理各种静态文件
+  2.webpack上commonjs写的  AMD/CMD 的支持也很全面
+  3.对es6语法做了兼容
+  4.可以将代码切成块（chunk），实现按需加载，降低初始化时间
+  5.拥有强大的plugin 大部分内部插件 用起来比较灵活
+  6.有独立的配置文件webpack.config.js
+
+ 
+
+localStorage   里面存储的数据没有过期时间设置，
+sessionStorage 里面的数据在页面会话结束时会被清除。
+
+// 保存数据到sessionStorage
+sessionStorage.setItem('key', 'value');
+
+// 从sessionStorage获取数据
+var data = sessionStorage.getItem('key');
+
+// 从sessionStorage删除保存的数据
+sessionStorage.removeItem('key');
+
+// 从sessionStorage删除所有保存的数据
+sessionStorage.clear();        
+
+ 
+
+跨域：      https://www.cnblogs.com/roam/p/7520433.html
+1.) 资源跳转： A链接、重定向、表单提交
+2.) 资源嵌入： <link>、<script>、<img>、<frame>等dom标签，还有样式中background:url()、@font-face()等文件外链
+3.) 脚本请求： js发起的ajax请求、dom和js对象的跨域操作等
+解决方法：
+1、 通过jsonp跨域
+            <script>
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+
+                // 传参并指定回调执行函数为onBack
+                script.src = 'http://www.domain2.com:8080/login?user=admin&callback=onBack';
+                document.head.appendChild(script);
+
+                // 回调执行函数
+                function onBack(res) {
+                    alert(JSON.stringify(res));
+                }
+            </script>
+2、 document.domain + iframe跨域
+3、 location.hash + iframe
+4、 window.name + iframe跨域
+5、 postMessage跨域
+6、 跨域资源共享（CORS）
+7、 nginx代理跨域
+8、 nodejs中间件代理跨域
+9、 WebSocket协议跨域
+
+
+
+
+
+
+
+
+
+
+
+
+
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+react部分：
+
+
+1. React有props和state:
+    props意味着父级分发下来的属性，
+    state意味着组件内部可以自行管理的状态，
+    并且整个React没有数据向上回溯的能力，也就是说数据只能单向向下分发，或者自行内部消化。理解这个是理解React和Redux的前提。
+
+
+2. 一般构建的React组件内部可能是一个完整的应用，它自己工作良好，你可以通过属性作为API控制它。但是更多的时候发现React根本无法让两个组件互相交流，使用对方的数据。然后这时候不通过DOM沟通（也就是React体制内）解决的唯一办法就是提升state，将state放到共有的父组件中来管理，再作为props分发回子组件。
+
+
+3. 子组件改变父组件state的办法只能是通过onClick触发父组件声明好的回调，也就是父组件提前声明好函数或方法作为契约描述自己的state将如何变化，再将它同样作为属性交给子组件使用。这样就出现了一个模式：数据总是单向从顶层向下分发的，但是只有子组件回调在概念上可以回到state顶层影响数据。这样state一定程度上是响应式的。
+
+
+4. 为了面临所有可能的扩展问题，最容易想到的办法就是把所有state集中放到所有组件顶层，然后分发给所有组件。
+
+
+5. 为了有更好的state管理，就需要一个库来作为更专业的顶层state分发给所有React应用，这就是Redux。
+让我们回来看看重现上面结构的需求：
+    a. 需要回调通知state (等同于回调参数) -> action
+    b. 需要根据回调处理 (等同于父级方法) -> reducer
+    c. 需要state (等同于总状态) -> store
+
+
+对Redux来说只有这三个要素：
+    a. action是纯声明式的数据结构，只提供事件的所有要素，不提供逻辑。
+    b. reducer是一个匹配函数，action的发送是全局的：所有的reducer都可以捕捉到并匹配与自己相关与否，相关就拿走action中的要素进行逻辑处理，修改store中的状态，不相关就不对state做处理原样返回。
+    c. store负责存储状态并可以被react api回调，发布action.当然一般不会直接把两个库拿来用，还有一个binding叫react-redux, 提供一个Provider和connect。很多人其实看懂了redux卡在这里。
+
+
+    a. Provider是一个普通组件，可以作为顶层app的分发点，它只需要store属性就可以了。它会将state分发给所有被connect的组件，不管它在哪里，被嵌套多少层。   
+
+    b. connect是真正的重点，它是一个科里化函数，意思是先接受两个参数（数据绑定mapStateToProps和事件绑定mapDispatchToProps），再接受一个参数（将要绑定的组件本身）：
+
+        mapStateToProps：构建好Redux系统的时候，它会被自动初始化，但是你的React组件并不知道它的存在，因此你需要分拣出你需要的Redux状态，所以你需要绑定一个函数，它的参数是state，简单返回你关心的几个值。
+
+        mapDispatchToProps：声明好的action作为回调，也可以被注入到组件里，就是通过这个函数，它的参数是dispatch，通过redux的辅助方法bindActionCreator绑定所有action以及参数的dispatch，就可以作为属性在组件里面作为函数简单使用了，不需要手动dispatch。这个mapDispatchToProps是可选的，如果不传这个参数redux会简单把dispatch作为属性注入给组件，可以手动当做store.dispatch使用。
+        这也是为什么要科里化的原因。做好以上流程Redux和React就可以工作了。
+
+
+    简单地说就是：
+    1.顶层分发状态，让React组件被动地渲染。
+    2.监听事件，事件有权利回到所有状态顶层影响状态。
+
+
+
+
+
+    dva－cli框架 namespace state effect reducer各表示什么
+
+
+
+    redux知识点:
+        const actions = this.props.userInfoActions; //获取redux中的action
+        let userInfo = this.props.userInfo; //获取redux的user信息
+        userInfo.username = username;   //修改user信息
+        actions.updata(userInfo);      //执行action里面的updata函数  更新userInfo里面的username
+        mapStateToProps(state){
+            return (
+                userInfo:state.userInfo
+            )
+        }
+        mapDispatchToProps(dispatch){
+            return (
+                userInfoActions:bindActionCreators(userInfoActionForm)
+            )
+        }
+
+
+    router知识点:https://segmentfault.com/a/1190000012258651  路由4
+        <Router history={this.props.history}>
+            <Route path="/" component={App}>
+                <IndexRoute component={Home}>
+                <Route path="/city" component={City}>
+                <Route path="/login(/:router)" component={Login}>
+                <Route path="/search/:category(/:keyWord)" component={Search}>
+                <Route path="datail/:id" component{Detail}>
+                <Route path="*" component="{NotFind}">
+            </Route>
+        </Router>
+
+
+        <Route path="/login(/:router)" component={Login}>解释：
+        点击一些操作的时候需要登录状态，rudex中如果没用用户登录的状态，就带着本页面的url跳转到登录页面，登录以后根据url上到参数再跳回本页面
+        跳转的登陆页面的时候会带上页面的url，通过router获取
+        const params = this.props.params; /／获取URL中所有的字段
+        const router = params.router;   // 获取url中的router字段
+        if(router){
+            history.push(router);
+        }
+
+        <Redirect from="/" to="/home"></Redirect>    重定向
+

@@ -6,3 +6,9 @@
     1. vue init webpack yi
     2. 分组件
     3. 公用的css image -> assets(会更改你的文件名字)
+
+
+当样式 class 是 iconfont iconfont-add 如果iconfont-add可能是变量
+:class="['iconfont',data.icon]"
+
+ 
