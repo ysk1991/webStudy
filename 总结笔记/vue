@@ -1,0 +1,185 @@
+https://ustbhuangyi.github.io/vue-analysis/prepare/flow.html  源码揭秘
+
+vuex重新刷新，数据丢失：
+    原理：页面刷新，内存被释放，存在内存的数据丢失，因此写在生命周期里的vuex数据是重新初始化，无法获取的
+    localStorage:使用这个缓存数据;
+    可以使用vuex-persistedstate插件
+
+
+react和vue比较来说有什么区别
+    1 component层面，web component和virtual dom
+    2 数据绑定（vue双向，react的单向）等好多
+    3 计算属性 vue 有，提供方便；而 react 不行
+    4 vue 可以 watch 一个数据项；而 react 不行
+    5 vue 由于提供的 direct 特别是预置的 directive 因为场景场景开发更容易；react 没有
+    6 生命周期函数名太长
+
+
+spa应用首屏加载慢的问题：
+    抽取css new ExtractTextPlugin
+    组件分块懒加载
+        component: resolve => require(['../components/(你的组件)'], resolve)
+    nginx使用gzip减小网络传输的流量大小
+    服务端渲染的方式
+
+vue什么时候用computed  
+    购物车 总价会随着单价和数量进行变化
+vue什么时候用watch
+    用户在输入完了手机号和验证码之后，登录按钮才可以点击
+
+vue什么时候用methods
+    function方法
+
+
+
+
+
+
+
+
+
+vue怎么才能监听多层嵌套的对象数组？
+当vue的data里边声明或者已经赋值过的对象或者数组（数组里边的值是对象）时，
+向对象中添加新的属性，如果更新此属性的值，是不会更新视图的？
+    使用Vue.set 可以解决 让后面的添加的数据变成响应式
+        mounted () {
+            this.$set(this.student,"age", 24)     可以在methods里面使用
+        }
+        this.$set(arr,  index,  val)
+        this.$set( obj, key, val).
+        既可以新增属性,又可以触发视图更新。
+    arr=[1,2,3]
+    arr[1]='b'
+    console.log(arr)   // [1,2,3]
+    Vue.set(arr,2,'c')
+    console.log(arr)   // [1,b,c]  set触发了整个页面的重新渲染，连arr[1]='b'的效果也被重新渲染了。
+
+
+watch  computed   区别：
+    computed有缓存
+    watch消耗性能
+
+    
+<span v-text="msg"></span>  
+    <span>{{msg}}</span>
+    
+<span v-pre>{{message}}</span>    
+    这条语句不进行编译   
+
+<a v-if="true">yes</a>
+<a v-else>No</a>
+
+<div v-for="(item,index) in items"></div>   //使用in，index是一个可选参数，表示当前项的索引
+<div v-for="item of items"></div>   //使用of
+    当v-for和v-if同处于一个节点时，v-for的优先级比v-if更高。这意味着v-if将运行在每个v-for循环中
+
+<span :class="{navStyle: flag}"></span>
+    v-bind  简写为一个冒号 :bind
+
+
+
+vue3.0里面用 proxy() 替换了 Object.defineProperty() 的方法
+     1.无法监控到数组下标的变化 vue内部重写了数组函数 不需要一层层递归给每个属性添加代理，性能较好，
+     2.Proxy是es6提供的，兼容性不好 proxt可以监听任何数据 
+
+Q1:谈谈对vue的理解：
+    new Vue({})：
+        el template components props data create  methods computed watch
+    生命周期：
+        activated 和 deactivated(keep-alive) 。 
+    vue编译过程 ｜｜ 模板是怎么在浏览器中运行的？
+        1.各种各样的正则表达式去匹配模板中的内容，然后将内容提取出来做各种逻辑操作，接下来会生成一个最基本的 AST 对象
+        2.通过 AST 生成 render 函数 遍历整个 AST 输出dom
+ 
+
+    new Vue({}) 发生了什么：
+        Vue 初始化主要就干了几件事情，合并配置，初始化生命周期，初始化事件，初始化渲染，初始化 data、props、computed、watcher 等等        
+
+Q2:实现双向绑定 mvvm原理: 
+    observe： defineReactive函数里用Object.defineProperty() 用递归的方式把每个属性设置上get与set  监听并数据劫持！
+    Watcher:  数据变动,调用对应data的Dep.notify方法通知 订阅该属性的Watcher 修改自己的状态
+    Dep方法：  定义Dep函数维护一个数组进行依赖收集
+    Compile:  对每个元素节点的指令进行扫描和解析，根据指令模板替换数据，以及绑定相应的更新函数
+
+     
+Q3:  谈谈Vuex使用方法与实现原理 22-23课store文件夹下
+
+    vuex核心： state，getter，mutation，action，module 
+    state：   存储数据，存储状态；在根实例中注册了store 后，用 this.$store.state 来访问；对应vue里面的data；存放数据方式为响应式，
+              vue组件从store中读取数据，如数据发生变化，组件也会对应的更新。
+    getter：  可以认为是 store 的计算属性，它的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
+    mutation：更改 Vuex 的 store 中的状态的唯一方法是提交 mutation。
+    action：  包含任意异步操作，通过提交 mutation 间接更变状态。
+    module：  将store 分割成模块，每个模块都具有state、mutation、action、getter、甚至是嵌套子模块。
+     
+
+     为什么有了action 还有mutation
+        dispatch到action：
+            异步操作，例如向后台提交数据，写法： this.$store.dispatch('action方法名',值)
+        commit到mutation：
+            同步操作，写法：this.$store.commit('mutations方法名',值)
+
+    场景有：
+        单页应用中，组件之间的状态、音乐播放、登录状态、加入购物车
+
+    vuex原理：
+        相当于一个隐藏的vue组件
+        每个子组件上面也挂载store的引用
+        通过使用Vue的响应式系统，实例化一个vue对象，把state装载到data属性上面，
+        并且把getters装载到computed属性上面，来实现数据的响应式化。 
+
+    可以在modules里定义多个store  state  mutations actions getters 只能有一个  
+
+    vuex辅助方法： 
+        可以把store对象里面的 state actions getters 映射到 vue组件里面直接使用
+        mapState        state -> computed方法里       
+        mapActions      actions -> methods方法里
+        mapGetter       getters -> computed方法里
+        mapMutations    
+        methods: {
+                    ...mapActions(["increment","decrement"]),
+                    incrementWithValue() {
+                        this.$store.dispatch("incrementWithValue", this.incrementValue)
+                    }
+                }
+                
+    vue.use(Vuex)  store如何实现注入？
+        是执行install方法，传入的store对象设置成vue上下文环境的$store中，因此在组件中任意地方都可以用this.$store访问
+
+
+
+    如何区分state是外部直接修改，还是通过mutation方法修改的？
+        只要用watch一下state状态，change时是否改变_committing的值，即可判断修改的合法性
+
+    调试时的"时空穿梭"功能是如何实现的？
+        '时空穿梭' 功能其实就是将当前的state替换为记录中某个时刻的state状态，
+        利用 store.replaceState(targetState)方法将执行 this._vm.state = state 实现。    
+
+     
+
+
+
+Q5:keep-alive 组件有什么作用  
+    例： 
+        页列表跟详情页来回切换 对列表组件keep-alive进行缓存，这样用户每次返回列表的时候，都能从缓存中快速渲染，而不是重新渲染
+    对于 keep-alive 组件来说，它拥有两个独有的生命周期钩子函数，分别为 activated 和 deactivated 。
+    用 keep-alive 包裹的组件在切换时不会进行销毁，而是缓存到内存中并执行 deactivated 钩子函数，命中缓存渲染后会执行 actived 钩子函数。
+
+
+Q6: computed 和 watch 区别
+    1.computed 计算属性， 有缓存，只有当计算值变化才会返回内容。
+    2.watch 监听到值的变化就会执行回调，在回调中可以进行一些逻辑操作。
+    3.需要依赖别的属性来动态获得值的时候可以使用 computed，对于监听到值的变化需要做一些复杂业务逻辑的情况可以使用 watch。
+
+
+Q7: 组件中 data 什么时候用函数 什么时候用对象
+        1.组件复用时所有组件实例都会共享 data，如果 data 是对象的话，就会造成一个组件修改 data 以后会影响到其他所有组件，
+        所以需要将 data 写成函数，每次用到就调用一次函数获得新的数据。 
+        2.new Vue({})   写成对象 其他都写成函数  
+
+
+请列举出3个Vue中常用的生命周期钩子函数? 
+    created:  初始化vue自身方法
+    mounted:  可以访问dom
+    activated: keep-alive组件激活时调用
+ 

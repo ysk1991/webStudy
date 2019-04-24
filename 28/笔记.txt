@@ -1,0 +1,60 @@
+onClick里面的函数写成会直接执行？要传参是不是很麻烦
+{ function (){}.bind(this) }
+
+oDiv.onclick=function (){};
+oDiv.onclick=fn;
+
+redux
+react-router
+
+
+老师能讲下多页面分开打包吗，我现在做的公司项目，用的vue开发用于原生的h5页面，所有的页面都单独开发和打包
+
+这样的脚手架怎么搭建好？
+
+
+redux——集中状态管理
+provider：包在最外面
+connect：状态映射
+reducer：状态对象
+
+状态更新->action
+
+
+cnpm i redux react-redux -D
+
+先写reducer 传递初始的state  传递action action返回全新的state
+然后将state传入 createStore(reducer) 形成store
+最后render的时候  
+    <Provider store={store}>
+        <App/>
+    </Provider>    
+在组件里使用redux的时候 使用connect连接 两个参数 一个state（reducer里面传的）  一个prop（组件自身的）    
+state prop 两个参数融合在一起  通过 this.props 访问里面的属性跟方法 如果重名 自己决定用哪个
+
+多个reducer可以用 combinReducers合并  
+    let arr = combinReducers({
+        user:reducer1,
+        goods:refucer2
+    })
+state 变量名 可以重复  外面组件使用的时候： this.props.user.refucer
+action 方法会同时执行  所以不同reducer需要不同的action名字
+
+
+--------------------------------------------------------------------------------
+
+单向数据流
+state->component->action->state...
+
+--------------------------------------------------------------------------------
+
+react-router-dom：
+Router
+Route
+Link
+    <Link to="/new/1">新闻1</Link>
+    <Link to="/new/2">新闻2</Link>
+    <Route path="/new/:id" exct component={Cmp1}/>
+    {this.props.match.params.id} 在组件里可以调用到这个id
+
+

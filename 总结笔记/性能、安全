@@ -1,0 +1,146 @@
+react性能优化：
+
+    1、按需加载：split coding或动态路由；
+        采用 react-loadable 来实现路由按需加载
+        Loadable({
+            loader: () => import('./page/home/'),
+            loading: MyLoadingComponent
+        });
+        // Dashboard
+        const LoadableDashboard = Loadable({
+        loader: () => import('../Dashboard'),
+        loading: Loading
+        });
+
+        export class Dashboard extends React.Component {
+        render() {
+            return <LoadableDashboard {...this.props}/>    // 传递props
+        }
+        } 
+    2、GZIP压缩：效果很显著；
+        node端 ／ nginx
+    3、服务端渲染。
+    
+
+
+    react做了什么？
+        Virtual Dom模型  生命周期管理
+        setState机制  diff算法  React patch、事件系统
+        react的 Virtual Dom模型
+    setState：
+        是“异步”的，调用setState只会提交一次state修改到队列中，不会直接修改this.state。
+        一个队列 每个this.setState()都会被合并起来 一次解决。 
+        setState会存在循环调用的风险。  但是不会重复渲染 因为updata会进入多个生命周期会重复调用 
+    diff：
+        算法用于计算出两个virtual dom的差异，是react中开销最大的地方。
+        diff对树进行分层比较 只对比两棵树同级别的节点。跨层级移动节点，将会导致节点删除，重新插入，无法复用。
+        diff对组件进行类比较 key 两棵树中存在相同key的节点时，只会移动节点。
+    正确使用diff算法：
+        不使用 跨层级 移动节点的操作。        
+        对于条件渲染多个节点时，尽量采用隐藏等方式切换节点，而不是替换节点。
+        尽量避免将后面的子节点移动到前面的操作，当节点数量较多时，会产生一定的性能问题。
+
+
+
+vue性能优化：
+    代码包优化：
+        1. 屏蔽sourceMap          productionSourceMap修改成false
+        2. 对路由组件进行懒加载     component: resolve=>require(["@/views/home"],resolve)
+    代码优化：
+        1.尽量用v-if，是懒加载；    loading    图片资源按需加载    为循环设置唯一key值 
+        3.Webpack 的代码分割功能
+        5.细分vuejs组件   
+        6.减少watch的数据     
+        8.SSR(服务端渲染)  
+    优化http请求：
+        1. 因为是无状态协议  所以要需要拿着cookie才知道你是'老用户'
+        2. tcp连接,会与ip连接 TCP/IP -> 发送请求 -> 接收请求 -> 发送数据 -> 断开tcp连接
+        3. 有自己对状态码 1（已经接受正在处理）  2（成功） 3（重定向） 4（客户端错误） 5（服务端错误）
+        3. 优化http请求的方案
+            TCP复用，多个http请求通过一个tcp连接进行请求；
+            将经常用到的内容缓存起来；
+            将文本内容进行压缩，减少带宽
+            tcp缓冲技术
+            ssl协议对http协议进行加密并加速
+安全：
+    1. XSS
+        1.跨站脚本攻击
+        2.往Web页面里插入恶意Script代码
+        3.比如盗取用户的cookie。
+        4.可插入执行脚本的漏洞，比如某段编辑内容，如果不处理用户的输入就直接存储到数据库中
+        5.解决办法： 前端要以各种方式过滤里面可能的恶意脚本，例如script标签，将特殊字符转换成HTML编码。
+    2. CSRF
+        1.攻击者盗用了你的身份，以你的名义发送恶意请求ET请求 
+        2.登录受信任网站A，并在本地生成Cookie。
+　　     3.在不登出A的情况下，访问危险网站B。
+        4.服务端进行防御，然后加验证码
+加密:
+    1. md5.js
+    2. base64加密
+    3. sha1.js
+    4. jsencrypt.js
+    5. 最可靠的加密是前端js的md5+salt加密（非对称加密）
+        md5只能加密不能解密＋为用户生成Salt值； 与密码进行连接 连接后散列 得到hash值  hash与salt都存入数据库 
+        登录时 用户输入的密码跟数据库的salt值进行散列 跟数据库的hash值进行对比 一致就成功
+
+
+webpack性能优化：
+    压缩代码：
+        UglifyJS      压缩js
+        UglifyES      压缩es6
+        ParallelUglifyPlugin  
+            多线程压缩 开启多个子进程  每个子进程并行 通过UglifyJS去压缩代码  用于解决线上的代码构建时慢  
+            cacheDir：缓存压缩后的结果  之后的构建中会变的更快
+    提取公共代码：
+        webpack4
+            用两个新的配置选项(
+                optimization.splitChunks 、 optimization.runtimeChunk
+            )替代了CommonsChunkPlugin。 
+        base.js： 所有页面都会依赖 react、react-dom 等库  提取到base.js    目的长期的缓存
+
+//在webpack4之前，提取公共代码都是通过一个叫CommonsChunkPlugin的插件来办到的。
+／／到了webpack4以后，内置了一个一模一样的功能，就是所谓的“优化”
+//    optimization: {  // 提取公共代码
+//         splitChunks: {
+//             cacheGroups: {
+//                 vendor: {   // 剥离第三方插件
+//                     test: /node_modules/,   // 指定是node_modules下的第三方包
+//                     chunks: 'initial',
+//                     name: 'vendor',  // 打包后的文件名，随意命名   
+//                     priority: 10    // 设置优先级，防止和自定义的公共代码提取时被覆盖，不进行打包
+//                 },
+//                 utils: { // 抽离自己写的公共代码，utils这个名字可以随意起
+//                     chunks: 'initial',
+//                     name: 'utils',  // 任意命名
+//                     minSize: 0    // 只要超出0字节就生成一个新包
+//                 }
+//             }
+//         }
+//     },
+
+
+样式分离：
+    说明一下：由于使用了css分离，会导致css背景图片和html img标签图片路径出错问题，
+    这里的解决办法是：css中使用的图片用assets/static/images中的图片，css-loader配置的options中url：false，
+    这样在解析css时就不会处理css图片路径，
+
+    const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+    {
+        test:/\.less$/,
+        use: ExtractTextWebpackPlugin.extract({
+            fallback:'style-loader',
+            use:[
+                {
+                    loader:'css-loader',
+                    options:{
+                        url:false,
+                        importLoaders:1
+                    }
+                },
+                    'postcss-loader',
+                    'less-loader'
+            ],
+            publicPath: '../css'  
+            }),
+            exclude: path.resolve(__dirname,'./node_modules')
+    }

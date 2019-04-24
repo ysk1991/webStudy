@@ -1,0 +1,79 @@
+ 
+满宽750rpx
+
+
+
+view - div
+text - span
+button - button
+
+scroll-view	
+   滚动视图 要一个宽度
+   scroll-y="true"
+swiper		
+  banner视图
+icon
+  type="success" size="60"
+image   <image src="..."
+video    <video src="..."
+audio    <audio src="..."
+
+a链接
+  <navigator url="..."></>
+
+form
+button size="mini" type="warn" form-type="submit"
+input
+radio/checkbox
+
+picker:
+  滑动选择器
+  mySelectFn(e){
+    this.setData({
+      selectIndex:e.detail.value; //选中的下标
+    })
+  }
+  <picker range='{{citys}}' bindchange='mySelectFn' > 自定义
+    <view>当前选择：{{citys[selectIndex]}}</view>
+  </picker>
+   <picker mode="date"> </picker> 日期
+   <picker mode="region"> </picker> 地区
+
+
+map 地图
+canvas  绘图
+ad  接广告
+
+
+https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
+
+wx54a46fc113d310d7
+d4b0272a2f24bdaf2e2af6155dcc0508
+
+https://api.weixin.qq.com/sns/jscode2session?appid=wx54a46fc113d310d7&secret=d4b0272a2f24bdaf2e2af6155dcc0508&js_code=061f4mX52eNMAQ0aMtX52C2iX52f4mX6&grant_type=authorization_code
+
+
+{"session_key":"pfomyS1oQH8tbiaYIV2b8Q==","openid":"oxgA75IDrvwn9jphgP6PQgG1zVas", unionid}
+
+session_key  会话id 会变的
+access_token 访问接口的令牌 需要申请  会变的
+openid 用户id 不会变
+ 
+
+1.蓝牙
+  BLE
+2.WiFi
+3.NFC
+
+
+
+
+
+
+
+
+
+
+
+
+

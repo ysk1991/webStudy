@@ -1,0 +1,11 @@
+git fetch && git pull
+git pull自动完成了fetch最新远程版本，并且和本地进行merge
+git fetch获得远程分支，要继续手动merge合并
+
+git clone
+git add .
+git commit -m '''
+git push
+git pull origin master
+git status
+git diff

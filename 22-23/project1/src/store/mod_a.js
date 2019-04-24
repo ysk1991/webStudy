@@ -12,9 +12,7 @@ export default{
     }
   },
   actions: {
-    setStr({
-      commit
-    }, s) {
+    setStr({commit}, s) {
       commit('setStr', s);
     }
   }

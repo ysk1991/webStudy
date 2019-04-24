@@ -1,0 +1,179 @@
+系统学习react：
+https://www.twblogs.net/a/5c8c8a66bd9eee35fc14f2d3
+
+react  常见面试题 https://www.jianshu.com/p/4357c4ae99eb
+
+
+生命周期：
+    初始化部分：
+        getDefaultProps
+            父组件传递过来的props
+        getInitialState
+            可以在constructor里面定义this.state,此时可以使用this.props   
+        constructor 
+            以上两个可以被这个所代替                 
+        componentWillMount
+            整个生命周期只调用一次，此时可以通过this.setState修改state
+        render
+            创建虚拟dom，进行diff算法，更新dom树，此时不能更改state了
+        componentDidmount         
+            组件渲染之后调用，整个生命周期只调用一次 可以async
+    更新部分：
+        shouldComponentUpdata(nextProps,nextState)
+            性能优化非常重要，可以避免不必要的渲染
+            组件接受新的state或props时调用
+            可以在这里对比新旧属性，判断是否需要更新，避免多余的diff算法，提高性能
+        conponentWillReceiveProps(nextProps)
+            当从父类接收到 props 并且在调用另一个渲染器之前调用。 组件接受到新的porps时调用 
+        componentWillUpdata
+            在组件更新时才调用，此时可以修改state
+        render
+            更新准备好以后渲染
+        componentDidUpdata
+            组件更新完成之后调用，可以获取dom节点                                
+    卸载：
+        componentWillUmmount   组件将要卸载，一些事件的监听和定时器在这清除   
+
+
+
+JSX 的基本语法规则：遇到 HTML 标签（以 < 开头），就用 HTML 规则解析；遇到代码块（以 { 开头），就用 JavaScript 规则解析。
+所以给jsx添加注释只要这样子：  {/* 。。。 */}
+
+
+react和vue比较来说有什么区别
+    1 component层面，web component和virtual dom
+    2 数据绑定（vue双向，react的单向）等好多
+    3 计算属性 vue 有，提供方便；而 react 不行
+    4 vue 可以 watch 一个数据项；而 react 不行
+    5 vue 由于提供的 direct 特别是预置的 directive 因为场景场景开发更容易；react 没有
+    6 生命周期函数名太长
+
+props 和单向数据流。数据通过 props 在组件树间向下传递。
+要想数据向上传递，需要通过回调函数实现，因此必须首先将回调函数向下传递到任何想通过调用它来传递数据的组件中。
+Redux DevTools 检查每一个 state 的变化），time-travel debugging（你可以回滚 state 变化，看看你的应用以前的样子）
+
+setState
+    1. 是异步 setTimeout包裹下是同步:
+    2. 基于event loop的模型下，setTimeout 中里去 setState 总能拿到最新的state值。        
+    3.setState并不会立即改变state的值，而要想数据向上传递，需要通过回调函数实现，
+        因此必须首先将回调函数向下传递到任何想通过调用它来传递数据的组件中。
+        是将其放到一个任务队列里，最终将多个setState合并，一次性更新页面。 
+多次setState会合并为什么会合并?
+    主要是setState触发页面重新渲染， 需要经过以下生命周期：
+        shouldComponentUpdate
+        componentWillUpdate
+        render
+        componentDidUpdate
+    其实state的值只有在render的时候才真正被修改了        
+React 中 key 的重要性是什么？
+    key 用于识别唯一的 Virtual DOM 元素及其驱动 UI 的相应数据。
+    它们通过回收 DOM 中当前所有的元素来帮助 React 优化渲染。这些 key 必须是唯一的数字或字符串，
+    React 只是重新排序元素而不是重新渲染它们。这可以提高应用程序的性能。
+react创建组件三种方式：
+    1. 纯函数式定义的无状态组件
+    2. React.createClass 定义的组件
+    3. extends React.Component 定义的组件
+函数式组件:
+    1. 组件不会被实例化,整体渲染性能得到提升
+    2. 组件不能访问this对象
+    3. 组件无法访问生命周期的方法
+    4. 无状态组件只能访问输入的props,无副作用    
+类组件:
+    1. 直接用this
+    2. 有自己的生命周期    
+
+
+
+
+设置默认值：  // 编译过才实现
+static defaultProps = {
+    propsName1: value1,
+    propsName2: value2,
+    ...
+}
+HelloMessage.defaultProps = {      //用组件名设置  通过赋值特定的 defaultProps 属性为 props 定义默认值：
+    name: '我是props的默认值！'
+};
+
+react hash路由 页面刷新参数弄丢  使用qs，sessionstorage 和 localstorage 储存都可以实现
+
+ 
+
+点击事件用法：
+    onClick={ () => this.handleClick('name1') }  //传递参数用箭头函数
+    onClick={ () => this.handleClick('name2') }
+    onClick={ () => this.handleClick('name3') }
+    onClick={ this.handleClick() }      //无需传参
+
+handleClick = (type) => {       //传递的参数可以用[]的方式 再setState里面使用
+    this.setState({
+        [type]:true
+    })
+}
+
+jsx语法糖： <script type="text/babel">
+    render(){
+        let div=<div style={{color: 'red'}}>bbbb</div>;
+        return (
+            <div>
+                <label htmlFor="user" className="bgColor" 
+                    onClick={this.fn.bind(this,userName)}>用户名：</label>
+                {div}
+            </div>
+        );
+    }
+</script> 
+
+ 
+
+    提取父组件传来的arr  通过数组map方法循环出标签
+    {this.props.arr.map((str,index)=><Child ref="child1" txt={str} key={index}><span>123</span></Child>)}
+    可以用this.props.txt获取父组件传递给他的值
+
+    <Child ref="child1" parent={this}/>
+    this.props.parent.add(11)    子组件拿父组件的add方法
+    this.refs['child1'].add(7);  父组件拿子组件里面的add方法
+
+    let { age } = this.props;   子组件 接受 父组件属性 
+
+ let {data}=await axios.get(`add/${name}/${price}/${count}`);
+
+ 
+ 
+
+使用Component还是PureComponent:
+    PureComponent具有一个浅比较的shouldComponentUpdate方法 对props和state进行浅比较
+
+ 
+
+react的权限设置：
+    所有的api接口请求都带上这个TOKEN，后台拿到TOKEN就知道用户身份，也就知道该用户有哪些权限！
+    用户在退出的时候，你删除本地的TOKEN！
+
+
+
+ 
+
+
+fiber架构:
+    相比以前的递归更新组件优势：
+        递归更新组件会让js调用栈 占用很长时间
+    分段渲染原理：
+        浏览器单线程，优化js代码  将组件渲染分段执行 提高执行效率
+        fiber架构拥有return child sibling三个属性  变成链表 深度优化遍历
+    怎么决定每次更新数量：
+        规定一个时间段内，能转换多少个fiberNode就转换多少个，拿规定时间去判断，超过了进入下一个更新阶段
+        第一阶段：虚拟dom ＝> fiber节点
+        第二阶段：fiber节点 ＝> 组件实例 或 真实dom
+    怎么调度时间才保证流畅：
+        使用浏览器自带的api：
+            requestIdleCallback
+    受控组件：
+        必须有onchange方法 获取input的值 使用 e.target.value
+    非受控组件：
+        通过ref操作dom
+    状态提升：
+        两个子组件的共同状态 提升至最近的共同的父组件管理                       
+
+react实现双向绑定：
+    input绑定onchange事件  事件里改变setState，实现双向绑定

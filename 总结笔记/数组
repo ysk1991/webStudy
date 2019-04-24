@@ -1,0 +1,76 @@
+改变原数组：
+    pop()  push()  unshift()  shift()  splice()  reverse()  sort()
+不改变原数组：
+    concat()  jion()  map()  filter()  some()   every()  
+
+split() join() 的区别？
+    答案：前者是将字符串切割成数组的形式，后者是将数组转换成字符串
+
+判断元素是否为数组
+    1. Array.prototype.isPrototypeOf([]);  //true          
+         isPrototypeOf：一个对象是否在另一个对象的原型链中，一个对象是否被包含在另外一个对象的原型链中
+    2. Object.prototype.toString.call([]) == '[object Array]'
+    3. [] instanceof Array;  //true 
+    4. Array.isArray([1, 2, 3]);  // true
+
+数组扁平化:
+    用.some()方法 检测是否还有数组 
+    用Array.isArray()判断是数组
+    然后arr = [].concat.apply([],arr); 拼接数组
+    let arr1 = [1,2,[3,4,[5,6]],7,8,9]; 
+    console.log(flatten(arr1)) 
+    function flatten(arr){
+        while(arr.some(item => Array.isArray(item))){
+            arr = [].concat.apply([],arr);
+        }
+            return arr;
+    }    
+
+降维数组
+    var arr=[[1,2],[3,4]];
+    function Jw(obj){
+        return Array.prototype.concat.apply([],obj);
+    }
+    Jw(arr);
+
+array.some(item,index,array):   方法用于检测数组中的  某一元素 是否有满足指定条件的，若满足返回true，否则返回false；
+array.every(item,index,array):  方法用于检测数组中的  所有元素  是否都符合指定条件，若符合返回true，否则返回false；
+
+ 数组去重：
+    es6的方法：
+        function unique(arr) {
+            return Array.from(new Set(arr))
+        } 
+        [...new Set(arr)]
+
+    new Set 对象数组的去重？
+ 
+    Array.prototype.unique3 = function(){
+        var res = [];
+        var json = {};
+        for(var i = 0; i < this.length; i++){
+            if(!json[this[i]]){
+                res.push(this[i]);
+                json[this[i]] = 1;
+            }
+        }
+        return res;
+    }
+    var arr = [112,112,34,'你好',112,112,34,'你好','str','str1'];
+    alert(arr.unique3()); 
+
+
+
+如何使用 splice() 来更改数组。
+    arr.splice(2,3,"aaa")  从下标2开始删除3个 再2的位置添加aaa
+    arr.splice(2,0,"aaa")  从下标2开始删除0个 再2的位置添加aaa    
+
+
+伪数组变成真数组:
+    Array.prototype.slice.call(arguments);
+
+数组操作：
+    入栈push()、 出栈pop()；
+    push()尾部添加 pop()尾部删除
+    unshift()头部添加 shift()头部删除
+

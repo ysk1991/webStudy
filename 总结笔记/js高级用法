@@ -1,0 +1,85 @@
+js底层解读：
+    https://blog.csdn.net/deniro_li/article/details/80388539
+
+编程范式：
+    1. 命令式 
+        面向过程
+    2. 面向对象  
+        优点：
+            可以使用原型继承 OOP
+            方法可以直接调用，不需要面向过程编码
+        缺点：
+            需要状态共享。因为方法都要添加到一个实体上面，方法可能会被改变，耦合度高
+    3. 函数式编程
+        优点：    
+            避免状态共享  变更与副作用
+            纯函数 函数的纯粹性  复用性比面向对象强
+            如何可以避免副作用，使用纯函数，与业务无关
+                纯函数方法： map filter reduce redux的createStore里的compose(从右到左执行)
+        缺点：
+            无参风格，大量方法的组合，影响可读性            
+        例子：
+            闭包  箭头函数   class类函数  高阶函数   arguments作为参数
+            柯里化编程      
+                一个函数处理一个参数，每个参数都能很自由，参数处理完传递给下一个函数
+            
+        性能优化：
+                尾递归、尾调用
+ 
+    
+类继承：
+    new 一个constructor构造函数
+    有父类 子类 分层结构
+    es6 可以用class在定义 extends  super实现继承 
+    基本不使用类继承，除了React.Component。 因为会创建紧密的耦合
+原型继承：
+    prototype更加灵活
+    往往使用工厂模式  或  object.create()   
+    原型链  mixins  object.assgin() 
+
+
+
+
+ 
+         
+函数柯里化
+    传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数。
+    add(1, 2, 3);
+    function add(a, b, c) {
+        return a + b + c;
+    }
+    等价于： 
+    _add(1)(2)(3);          // 每个参数都能很自由的单独处理然后执行
+    function _add(a) {
+        return function(b) {
+            return function(c) {
+                return a + b + c;
+            }
+        }
+    }
+
+    使用场景之一：减少重复传递不变的部分参数
+        比如函数有3个参数  两个参数是一样的 就可以用函数柯里化
+
+
+react的hoc高阶组件：
+    HOC就是一个方法，获取一个组件，返回一个更高级的组件
+        function loading(wrappedComponent) {
+            return class Loading extends React.Component {
+                render(){
+                    if(!this.props.data) {
+                        return <div>loading...</div>
+                    }
+                    return <wrappedComponent {...props} />
+                }
+            }
+        } 
+        class MyComponent extends React.Component {
+            render(){
+                return <div>{this.props.message}</div>
+            }
+        } 
+        export default control(MyComponent);
+    例子：
+        react-redux的connect方法就是一个HOC，mapStateToProps  mapDispatchToProps 传入方法 将store以...newProps形式传入新组件
+     

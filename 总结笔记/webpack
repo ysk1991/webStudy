@@ -1,0 +1,37 @@
+
+webpack 配置  
+    gulp webback的区别：  webpack.config.js 第17节课的文件
+    webpack:打包工具  把项目中文件打包成一个或多个文件 实现模块化
+        1.打包工具   
+        2.模块化识别 
+        3.编译模块工具 
+    gulp：是工具链  构建工具  对文件进行压缩编译 实现自动化
+        1.构建项目工具
+        2.模块化
+        3.提高工作效率
+
+谈谈webpack：
+    优点：WebPack 是一个模块打包工具，你可以使用WebPack管理你的模块依赖，并编绎输出模块们所需的静态文件。
+    它能够很好地管理、打包Web开发中所用到的HTML、Javascript、CSS以及各种静态文件（图片、字体等），让开发过程更加高效。
+    对于不同类型的资源，webpack有对应的模块加载器。webpack模块打包器会分析模块间的依赖关系，最后生成了优化且合并后的静态资源。
+    好处：
+    1.loader处理各种静态文件
+    2.webpack上commonjs写的  AMD/CMD 的支持也很全面
+    3.对es6语法做了兼容
+    4.可以将代码切成块（chunk），实现按需加载，降低初始化时间
+    5.拥有强大的plugin 大部分内部插件 用起来比较灵活
+    6.有独立的配置文件webpack.config.js
+
+    常用loader：
+        （module，rules，test，use，exclude，option）
+        样式：style-loader、css-loader、less-loader、sass-loader等
+        文件：raw-loader、file-loader 、url-loader等
+        编译：babel-loader、coffee-loader 、ts-loader等
+        校验测试：mocha-loader、jshint-loader 、eslint-loader等
+
+    常用plugin：
+        UglifyJsPlugin（内置）      压缩混淆
+        CommonsChunkPlugin（内置）  切割代码第三方库和业务代码分开打包
+        html-webpack-plugin         可以根据模板自动生成html代码，并自动引用css和js文件
+        optimize-css-assets-webpack-plugin  不同组件中重复的css可以快速去重
+        HotModuleReplacementPlugin      热更新

@@ -1,0 +1,38 @@
+vue和react
+1.vue 适合前端用
+2.react适合程序
+
+react生态圈
+1.JSX：扩展的JS，React强依赖
+2.Flux
+3.Redux
+4.React-Native：开发移动应用
+5.React-Server
+
+--------------------------------------------------------------------------------
+
+react.js
+1.组件
+2.状态
+
+参数——props   只读、从外面传进来
+状态——state   可变、内部加的
+
+--------------------------------------------------------------------------------
+
+npm i -g create-react-app
+
+
+browser.js  编译jsx
+react.development.js  核心库
+react.dom.development.js  dom库
+
+
+
+
+父 -> 子 this.refs['child'].add(7);  方法在子里面
+子 -> 父 <Child parent={this}/>  方法在父里面   子里面调用父等方法： this.props.parent.add(1)
+
+
+componentDidUpdata(old_props,old_state)  
+    数据请求，判断参数是否真的变了

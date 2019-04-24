@@ -1,0 +1,427 @@
+HTTP
+    超文本传输协议。
+    客户端可以像服务端发送http请求，服务端可以响应客户端返回数据
+    常见http方法：
+        GET
+            从服务器向客户端发送命名资源
+        PUT
+            将来自客户端的数据存储到一个命名的服务器资源中去
+        DELETE
+            从服务器中删除命名资源
+        POST
+            将客户端数据发送到一个服务器网关应用程序
+        HEAD
+            仅发送命名资源响应中的HTTP首部
+
+    200
+        成功。请求的所有数据都在响应主体中。
+    206
+        成功执行了一个部分或Range(范围)请求。206响应中必须包含Content-Range、Date以及ETag或Content-Location首部。断点续传必考题。
+    302
+        重定向。到其他地方去获取资源。客户端应该是用使用Location首部给出的URL来临时定位资源。将来的请求仍应使用老的URL。
+    304
+        缓存  如果客户端发起了一个GET请求，而资源最近未被修改，则用304说明资源未被修改。带有这个状态吗的响应不应该包含实体的主体部分。 
+    305
+        用来说明必须通过一个代理来访问资源；代理的位置由Locatin首部给出。
+    403
+        没有权限  请求被服务器拒绝了。
+    404
+        无法找到所请求的URL
+    500
+        服务器遇到一个妨碍它为请求提供服务的错误。
+    503
+        服务器现在无法为请求提供服务，但将来可以。            
+
+    什么是NDS解析
+        域名解析服务。将主机名转换为IP地址        
+
+
+
+
+
+
+    url被按回车流程：
+        （1）浏览器从URL中解析出服务器的主机名；
+        （2）浏览器将服务器的主机名转换成服务器的IP地址；
+        （3）浏览器将端口号（如果有的话），从URL中解析出来；
+        （4）浏览器建立一条与Web服务器的TCP连接；
+        （5）浏览器向服务器发送一条HTTP请求报文；
+        （6）服务器向浏览器回送一条HTTP响应报文；
+        （7）关闭连接，浏览器显示文档。    
+js怎么与ios通信？
+    请求url的时候，ios拦截url
+git使用过程中，如果你在开发着业务，突然另一个分支有一个bug要改，你怎么办
+    git stash       //将本次修改存到暂存区（紧急切换分支时）
+    git stash pop   //将所有暂存区的内容取出来
+forEach和map的区别？
+    1. map速度比foreach快
+    2. map会返回一个新数组，不对原数组产生影响,foreach不会产生新数组，
+    3. map因为返回数组所以可以链式操作，foreach不能
+你如何优化自己的代码？
+    代码重用
+    避免全局变量（命名空间，封闭空间，模块化mvc..）
+    拆分函数避免函数过于臃肿
+    注释
+Ajax原理
+    (1)创建对象
+        var xhr = new XMLHttpRequest();
+    (2)打开请求 
+        xhr.open('GET', 'example.txt', true);
+    (3)发送请求
+        xhr.send(); 发送请求到服务器
+    (4)接收响应
+        xhr.onreadystatechange =function(){}
+            (1)当readystate值从一个值变为另一个值时，都会触发readystatechange事件。
+            (2)当readystate==4时，表示已经接收到全部响应数据。
+            (3)当status ==200时，表示服务器成功返回页面和数据。
+            (4)如果(2)和(3)内容同时满足，则可以通过xhr.responseText，获得服务器返回的内容。 
+
+
+Math.max(a,b,c);//最大值       Math.min(a,b,c)//最小值
+
+js延迟加载的方式有哪些？
+    defer和async、动态创建DOM方式（创建script，插入到DOM中，加载完毕后callBack）、按需异步载入js
+
+null和undefined的区别？
+    null是一个表示"无"的对象，转为数值时为0；undefined是一个表示"无"的原始值，转为数值时为NaN。
+    变量被声明了，但没有赋值时，就等于undefined。
+
+var a = null;      alert(typeof a);      答案：object
+
+强制类型转换（parseInt,parseFloat,number）
+隐式类型转换（== ===）
+
+宏任务：包括整体代码script，setTimeout，setInterval。
+微任务：Promise，process.nextTick。
+    setTimeout(function(){
+        console.log('1')
+    }); 
+    new Promise(function(resolve){
+        console.log('2');
+                resolve();
+    }).then(function(){
+        console.log('3')
+    }); 
+    console.log('4'); 
+    ／／ 2 4 3 1
+
+设计模式
+    工厂模式
+        调api，返回我一个实例，就是工厂模式
+        Vue 源码中，你也可以看到工厂模式的使用，比如创建异步组件
+    单列模式
+        全局缓存、全局状态管理就是单列模式
+        在 Vuex 源码中，你也可以看到单例模式的使用，通过一个外部变量来控制只安装一次 Vuex
+    代理模式
+        事件代理就用到了代理模式。
+    发布-订阅模式
+        在 Vue 中，实现响应式也是使用了该模式。对于需要实现响应式的对象来说，
+        get：依赖收集，当改变了对象的属性时，就会触发派发更新。
+
+
+js基本类型
+    unfefined
+    null
+    boolean
+    string
+    number
+    symbol：
+        可以保证属性不重名
+        Symbol.for() ：会在全局搜索被登记的 Symbol 中是否有该字符串参数作为名称的 Symbol 值
+        Symbol.keyFor() ： 检测该字符串参数作为名称的 Symbol 值是否已被登记
+        
+
+ 
+
+
+
+promise原理：
+    0. 三个状态： pending（等待中）  resolved（完成了） rejected（失败拒绝了）
+    1.有一个队列，通过then方法注册回调函数，放入队列，当请求成功对时候，当异步代码执行完毕之后
+        调用resolve函数，将队列里面的回调函数一一执行
+    2.要在resolve执行之前，必须保证then方法已经注册好所有的回调方法，所以使用setTimeout将resolve函数包一层，
+        通过setTimeout机制(0秒执行，会放到最后执行)，将resolve中执行回调的逻辑放置到JS任务队列末尾，
+        以保证在resolve执行时，then方法的回调函数已经注册完成.
+    3. 优点：解决了地狱回调的问题， 
+       缺点：无法取消promise，错误需要通过回调函数铺获
+
+    new Promise(resolve => {
+        console.log(1);
+        resolve(3);
+    }).then(num => {
+        console.log(num)
+    });
+    console.log(2)     // 输出  1  2  3
+
+async await ：
+    async 就是将函数返回值使用 Promise.resolve() 包裹了下，和 then 中处理返回值一样， 
+    优点：不需要一直then 异步可以当成同步写
+    缺点：如果多个回调没有依赖性，却使用await就浪费性能 （代码没有依赖性的话，完全可以使用 Promise.all 的方式）      
+
+
+h5缓存:
+    1.
+        h5的离线缓存：  
+        <html manifest = "cache.manifest">    cache.mainifest  文件  
+    2.
+        cookies:    4K   浏览器与服务器之间来回传递
+        sessionStoreage:    5M   关闭浏览器之后自动销毁    可以解决vue的数据刷新丢失的问题
+        localStorage:       5M   除非手动删除  不然永远存在   可以解决vue的数据刷新丢失的问题
+        localStorage 设计方案：
+            1.不同域名都有自己的5M空间，从其他域名的地方来跨域 使用postMessage和iframe来跨域
+            2.不同业务块没有耦合的话 自己业务上加一个前缀，删除别人所有localStorage
+    3.
+        setItem getItem  removeItem方法    
+
+    
+
+　　 
+
+继承方式：
+    类继承 apply call   
+        function Super(){
+            this.colors=["red","blue"];
+        }
+        function Sub(){
+            Super.call(this);
+        }
+    原型链继承      
+        Child.prototype = new Parent();
+
+ call跟apply区别：
+    sub.apply(add,arguments);
+    sub.apply(add,[4,2]);
+    sub.apply(call,4,2);
+
+ 
+
+
+
+
+nodejs：
+    环境变量：
+        process.env.NODE_ENV === 'production'
+        process.env.NODE_ENV === 'development'
+
+
+
+
+ajax:
+    1. 针对mvc变成与mvvm不符
+    2. 需要引入jq 不方便
+fetch:
+    1. fetch默认不会带cookie，需要添加配置项 
+    2. 只对网络请求报错，对400，500都当做成功的请求，需要封装去处理
+    3. fetch没有办法原生监测请求的进度
+axios:
+    1. 从nodejs创建http请求
+    2. 支持Promise的api
+    3. 提供一些并发请求接口
+    4. 安全 支持防止 CSRF/XSRF
+
+ 
+     
+instanceof 的原理是什么？   
+    arr1的__proto__是否指向Array的prototype 
+    简单的说就是 数组的__proto__上面有没有Array的prototype
+
+
+  
+instanceof：判断一个对象是否是一个类的实例的时候
+hasOwnProperty：是用来判断一个属性或者实例是否在对象自身。
+isPrototypeOf： 一个对象是否在另一个对象的原型链中，一个对象是否被包含在另外一个对象的原型链中
+
+
+
+ 
+
+
+
+闭包：
+    首先说一下这个GC（垃圾回收机制） 函数在执行中 会分配一个空间  
+        执行后会回收这个函数 这就是一个回收机制 闭包里面的变量只要还在用 就不会被回收
+    闭包本质 －－ 局部变量利用闭包保存下来 以供后面来用 保存的本质 整个函数封在一个对象里 整个对象就是栈  
+            －－  函数作为返回值，函数作为参数传递
+
+    1.底层：栈   
+        执行函数的时候 每调一次函数 会替这个函数分配一个空间 这空间叫栈 所有的变量都在这个栈里面跑  函数结束的时候也会回收  
+        闭包可以做到函数执行完了 栈也不回收 这就叫闭包
+    2.高层：把函数当成对象处理  函数调用的时候就会创建一个对象 
+    3.缺点：不回收会造成性能问题，解决方法：在退出函数之前，将不使用的局部变量全部删除。
+    4 闭包的好处
+        (1)希望一个变量长期驻扎在内存当中(不被垃圾回收机制回收)
+        (2)避免全局变量的污染
+        (3)私有成员的存在
+        (4)安全性提高
+
+
+
+原型：
+    1.每一个构造函数都有一个prototype属性 是一个对象 所有属性的集合  （new出来的实例没有prototype）
+    2.protype有一个constructor属性 指向这个函数的本身
+    3.可以在prototype里面增加自己的属性  默认方法有hasOwnProperty,isPrototypeOf等
+    4.   fn=new Fn();  fn 可以调用 Fn里面的prototype属性跟方法 
+    5. Object instanceof Function  true
+        Function instanceof Object  true
+        Function instanceof Function  true
+    6.  arr instanceof Array //true  可以判断是否为数组     fn instanceof Fn    //true
+
+原型链：
+    1.为了实现继承     
+    2.访问一个对象属性时候，先查找自身是否有这个属性，没有沿着__proto__这条链向上找，这就是原型链
+    3.每个被new出来的fn 都有一个__proto__对隐式原型  fn.__proto__ === Fn.prototype;
+    4.Object.prototype的__proto__ 指向null 
+    5.Object.__proto__ === Function.prototype 因为Object是被Function创造出来的
+作用域链：
+    1. 全局作用域   函数内部作用域  es6用let解决链这个问题 块级作用域
+    2. 要知道一个作用域下面的值是多少，要联系上下文才知道
+
+
+
+ 
+js的对象存储在对象中，深拷贝的效果就是在内存其他位置 存储一个一摸一样的对象 
+合并对象之后 返回的新对象内存地址就是新的
+
+深拷贝方式：
+    1. Object.assign(target, ...sources); 如果你不想对原始对象产生影响，就定义一个空对象{}作为target
+        可以实现深拷贝 不影响原先对象 （二层以上对象嵌套对象需要）  
+        let obj = {name:'abc',age:{c:11}};
+        let age = {c:12};
+        let oo = Object.assgin({},obj,age);   等价于 ： let o1 = {...obj, age: {c: 88}}
+        console.log(oo);   // {name:'abc',age:{c:12}};
+        oo.age.c = 66;      // {name:'abc',age:{c:66}};
+
+        浅拷贝：
+        const target = { a: 1, b: 2 };
+        const source = { b: 4, c: 5 };
+        const returnedTarget = Object.assign(target, source);
+        console.log(target);    // { a: 1, b: 4, c: 5 }
+        console.log(source);    // { a: 1, b: 4, c: 5 }
+
+    2. JSON.parse(JSON.stringify(obj))
+
+
+
+深拷贝与浅拷贝区别：（本质是：内存中的存储类型不同）
+    浅拷贝是传值，没有单独分配一个栈区
+    深拷贝：开辟一段栈内存，然后再把再将值赋值到新的栈中
+    
+    栈：自动分配内存空间，系统自动释放  （基本数据类型存放在栈中，基本数据类型值不可变。改了也是生成新的）
+    堆：动态分配内存，大小不定也不会自动释放（引用类型，可以改变其值）
+    简单的赋值就是浅拷贝；
+
+
+
+
+
+
+防抖：
+    指频繁触发的情况下，只有足够的空闲时间，才执行代码一次 只有停止滑动了 才执行
+    var timer = false;
+    document.getElementById("debounce").onscroll = function(){
+        clearTimeout(timer); // 清除未执行的代码，重置回初始化状态
+
+        timer = setTimeout(function(){
+            console.log("函数防抖");
+        }, 300);
+    };  
+
+节流：        
+    指一定时间内js方法只跑一次
+    监听页面元素滚动事件
+        var canRun = true;
+        document.getElementById("throttle").onscroll = function(){
+            if(!canRun){
+                // 判断是否已空闲，如果在执行中，则直接return
+                return;
+            }
+
+            canRun = false;
+            setTimeout(function(){
+                console.log("函数节流");
+                canRun = true;
+            }, 300);
+        };
+ 
+函数的arguments对象与Rest参数（...arr）区别： 
+    1. rest参数是对arguments对象使用 函数未知参数 的一个巨大改进。
+    2. Rest一个纯JavaScript数组；因此，你可以对它使用所有数组方法。
+    3. 你可以将Rest变量数据解构到命名变量中。你可以给rest参数指定任何名称 
+    
+    将arguments对象转换为数组
+        function add(num1,num2){
+            Array.prototype.slice.call(arguments) 将arguments对象转换为数组     
+        }
+    ES6用法：
+        function add(num1,num2){
+            Array.from(arguments)
+        }   
+
+
+
+axios超时怎么怎么获取：
+        axios.interceptors.response.use(
+            response => {
+                return response;
+            },
+            error => {
+                if(error.message.includes('timeout')){   // 判断请求异常信息中是否含有超时timeout字符串
+                    console.log("错误回调", error);      alert("网络超时");
+                    return Promise.reject(error);          // reject这个错误信息
+                }
+                return Promise.reject(error);   
+        });    
+
+    如果同时请求3个接口  弹出3个超时框 要怎么处理？
+        用flag，弹出前先判断是否可以弹出，一个超时就改变flag    
+        或者用.all方法同时请求，一个报错全部报错
+ 
+for in ／ for of ／ forEach 
+    for in  更适合遍历对象 遍历的是数组的索引（即键名）
+
+    for of  
+        arr的迭代器调用next的方法的返回值中的value属性
+        更适合遍历数组  数组有有Symbol.iterator这个迭代器对象
+        遍历的只是数组内的元素   不能遍历对象,因为没有Symbol.iterator这个迭代器对象 
+    内建的Object.keys()  
+        for (var key of Object.keys(someObject))         
+
+    forEach 缺点：    
+        无法跳出循环 可以用try{}catch(e)
+        try{
+                var array = ["first","second","third","fourth"];
+                array.forEach(function(item,index){
+                        if(item == "third"){
+                                var a = aaaa;                   // first second 后就报错，就跳出循环了
+                                throw new Error("ending");      //报错，就跳出循环
+                        }else{
+                                log(item);
+                        }
+                })
+        }catch(e){ } 
+        
+
+
+
+
+
+线上跨域除了jsonp还有什么方式    https://www.jianshu.com/p/f880878c1398
+    开发环境跨域：     
+        nginx代理跨域
+        nodejs中间件代理跨域
+
+    生产环境跨域：
+        1、JSONP
+            缺点： JSONP只支持GET请求 
+            优点： JSONP的优势在于支持老式浏览器，以及可以向不支持CORS的网站请求数据。
+        2、WebSocket
+
+        3、CORS
+            跨域时，浏览器会拦截Ajax请求，并在http头中加Origin。 Cross-Origin Resource Sharing
+            基于服务器支持的跨域，服务器设置Access-Control-Allow-Origin响应头，浏览器可允许跨域
+        4、postMessage
+            B.postMessage('data', '111'); //这里强调的是B窗口里的window对象
+            A.addEventListener('message', function (event) {   //这里强调的是A窗口里的window对象 
+            }, false);
+
+

@@ -1,0 +1,145 @@
+npm i react-router-dom -- save
+
+BrowserRouter:
+    原理是使用了history API  pushState  replaceState  popState
+    basename
+        如果你的文件放在服务器的二级目录下则可以使用它。
+    <BrowserRouter baseName='/ccc'>
+        <Route path='/' component={Home}>
+    </BrowserRouter>
+
+
+Redirect:
+    <Redirect to='/admin/home' /> 重定向
+ 
+Prompt:
+    <Prompt when={true} message="您确定要离开当前页面吗？"/>
+
+
+route：
+    route是配置，link是使用
+    <div>
+        <ul>
+            <li><Link to="/home">首页</Link></li>
+            <li><Link to="/other">其他页</Link></li>
+        </ul>
+        <Route path="/home" component={Home}/>
+        <Route path="/other" component={Other}/>
+    </div> 
+
+Link:
+    <Link to={{
+        pathname: '/courses',
+        search: '?sort=name',      问号参数
+        hash: '#the-hash',
+        state: {
+          fromDashboard: true
+        }
+      }} />
+
+
+NavLink:
+    <NavLink activeClassName='select' to='/second/123'></NavLink>
+    下面配一个
+    <Route exact to='/second/:id'></Route>
+    <Route path='/asdads' component={NoMatch}/>  路由不存在
+
+
+
+exact
+    用于严格匹配，匹配到/则不会继续向下匹配
+
+
+match：
+    this.props.match来获取match之中的信息
+    this.props.match.url
+    this.props.match.path
+    this.props.match.isExact
+    this.props.match.params.id
+
+
+
+Switch
+    只匹配一个路由  　（如果出现多个组件一起渲染出来的问题，就用Switch包一下  匹配到一个路由以后 就会break 不会再往下匹配）
+      <Switch>
+        <Route path='/admin/ui/buttons' component={Buttons}/>
+        <Route path='/admin/ui/loading' component={Loading}/>
+        <Route path='/admin/ui/tabs' component={Tabs}/>
+      </Switch>        
+ 
+withRouter：
+    export default withRouter(connect()(組件)) 
+      如果不使用withRouter此组件的this.props为空，没法执行props中的history、location、match等方法。 
+      将react-router 的 history、location、match 三个对象传入props对象
+      如果使用了react-router-redux,则可以直接从state 中的router属性中获取location。不需要再使用withRouter 获取路由信息了
+      一般是首页，不是通过路由跳转过来的，而是直接从浏览器中输入地址打开的，    
+
+
+      router.js:
+          第一种写法
+          <Home>       只有一个主页面 而且是最高层  一般都有平级页面  
+              <Route exact={true} path='/' component={Main}/></Route>      exact  精准匹配
+              <Route path='/about' component={About}/></Route>
+          </Home>
+
+          第二种写法： （嵌套路由，main组件里面还要组件aaa的情况下）
+          <div>        用div包裹，有多个平级页面 比如登陆页面  详情页面    常用！！！
+              <Switch>         
+                  <Route path='/main/a' render={()=>
+                      <Main>
+                          <Route path="/main/a" component={AAA}></Route>
+                      </Main>
+                  }/></Route>
+                  <Route path='/about' component={About}/></Route>
+                  <Route component={NoMatch}/></Route>      建一个NoMatch组件 写上404样式就行
+               </Switch>                
+          </div>
+
+
+ 
+<Provider store={store}>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact     render={() => (<h1>111111</h1>)} />
+        <Route path="/auth"       component={UnauthorizedLayout} />
+        <Route path="/app"        component={PrimaryLayout} />
+        <Route path='/main/a'     render={()=>
+              <Main>
+                  <Route path="/main/a" component={AAA}></Route>
+              </Main>
+          }>
+        </Route> 
+      </Switch>
+    </BrowserRouter>
+  </Provider> 
+ 
+  
+
+
+          
+
+ 
+
+
+
+history
+  this.props.history.push('/plan') 
+  go  
+    go-back => go(-1) 回退到上一個地址
+    go-forward =>go(1) 向前走一步
+
+location 獲取當前哈希路由渲染組件的一些信息 
+  pathname: 当前hash路由地址
+  search :  当前页面问号参数传值
+  state:    基於redirect/link/nav-link中的to,傳遞的是一個對象,對象中編寫state,就可以再location.state中獲取
+  match :   获取当前路由匹配的一些结果
+
+ 
+
+ 
+      
+
+react的路由守卫怎么做？
+    后端返回路由表与权限信息 还有按钮权限信息  然后前端循环判断  高阶组件封装一下
+
+阻止页面离开怎么做？
