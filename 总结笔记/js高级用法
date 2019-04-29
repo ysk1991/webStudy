@@ -15,7 +15,9 @@ js底层解读：
             避免状态共享  变更与副作用
             纯函数 函数的纯粹性  复用性比面向对象强
             如何可以避免副作用，使用纯函数，与业务无关
-                纯函数方法： map filter reduce redux的createStore里的compose(从右到左执行)
+                纯函数
+                    因为只要输入一致，输出必然一致
+                    方法： map filter reduce redux的createStore里的compose(从右到左执行)
         缺点：
             无参风格，大量方法的组合，影响可读性            
         例子：

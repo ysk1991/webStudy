@@ -1,3 +1,5 @@
+
+
 HTTP
     超文本传输协议。
     客户端可以像服务端发送http请求，服务端可以响应客户端返回数据
@@ -423,5 +425,7 @@ for in ／ for of ／ forEach
             B.postMessage('data', '111'); //这里强调的是B窗口里的window对象
             A.addEventListener('message', function (event) {   //这里强调的是A窗口里的window对象 
             }, false);
+
+
 
 
